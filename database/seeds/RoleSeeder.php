@@ -14,7 +14,7 @@ class RoleSeeder extends Seeder
     public function run()
     {
         $roleAdmin = Role::updateOrCreate(['name' => 'admin']);
-        Role::updateOrCreate(['name' => 'editor']);
+        $roleEditor = Role::updateOrCreate(['name' => 'editor']);
 
         User::updateOrCreate([
             'role_id' => $roleAdmin->id,
@@ -22,6 +22,15 @@ class RoleSeeder extends Seeder
             'last_name' => 'admin',
             'email' => 'admin@admin.com',
             'username' => 'admin',
+            'password' => '$2y$10$2FdIVd1fvX3Cag8Rd8qegudveBtC7YzT0FUfxCke/sqp5EF2ike86'
+        ]);
+
+        User::updateOrCreate([
+            'role_id' => $roleEditor->id,
+            'first_name' => 'editor',
+            'last_name' => 'editor',
+            'email' => 'editor@editor.com',
+            'username' => 'editor',
             'password' => '$2y$10$2FdIVd1fvX3Cag8Rd8qegudveBtC7YzT0FUfxCke/sqp5EF2ike86'
         ]);
     }
