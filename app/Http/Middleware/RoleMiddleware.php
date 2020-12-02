@@ -20,6 +20,6 @@ class RoleMiddleware
         if ($user->role->name == $role)
             return $next($request);
 
-        return redirect("/{$user->role->name}_dashboard");
+        abort(403);
     }
 }
