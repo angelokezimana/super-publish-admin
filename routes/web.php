@@ -21,5 +21,4 @@ Auth::routes(['register' => false, 'reset' => false, 'confirm' => false]);
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/admin_dashboard', 'Admin\DashboardController@index')->middleware('role:admin');
-Route::get('/editor_dashboard', 'Editor\DashboardController@index')->middleware('role:editor');
+Route::get('/users', 'UserController@index')->name('users.index')->middleware('role:admin');
