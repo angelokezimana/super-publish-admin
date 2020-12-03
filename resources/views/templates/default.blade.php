@@ -16,7 +16,7 @@
 
         @include('inc.nav')
 
-            <div class="container-fluid mt-custom">
+            <div class="container-fluid mt-custom padding-custom">
                 <div class="row">
                     @yield('content')
                 </div>              
