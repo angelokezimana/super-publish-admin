@@ -22,6 +22,7 @@ class RoleSeeder extends Seeder
             'last_name' => 'admin',
             'email' => 'admin@admin.com',
             'username' => 'admin',
+            'actif' => 1,
             'password' => '$2y$10$2FdIVd1fvX3Cag8Rd8qegudveBtC7YzT0FUfxCke/sqp5EF2ike86'
         ]);
 
@@ -31,6 +32,7 @@ class RoleSeeder extends Seeder
             'last_name' => 'editor',
             'email' => 'editor@editor.com',
             'username' => 'editor',
+            'actif' => 1,
             'password' => '$2y$10$2FdIVd1fvX3Cag8Rd8qegudveBtC7YzT0FUfxCke/sqp5EF2ike86'
         ]);
     }

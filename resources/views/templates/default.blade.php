@@ -16,13 +16,16 @@
 
         @include('inc.nav')
 
-        @yield('content')
-
-       
+            <div class="container-fluid mt-custom padding-custom">
+                <div class="row">
+                    @yield('content')
+                </div>              
+            </div>
+        </div>
       
 
         @include('inc.footer')
-    </div>
+        
     @include('inc.script')
    
 </body>

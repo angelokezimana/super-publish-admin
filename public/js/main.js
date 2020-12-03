@@ -95,6 +95,8 @@
         easingType: 'linear',
         scrollSpeed: 900,
         animation: 'fade'
-    }); 	   
+	}); 
+	
+	$('#dataTable').DataTable();
  
 })(jQuery); 
