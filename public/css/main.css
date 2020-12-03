@@ -98,7 +98,10 @@ textarea {
     margin-top: 60px;
 }
 
-
+.padding-custom {
+    padding-left: 5%;
+    padding-right: 5%;
+}
 
 
 
