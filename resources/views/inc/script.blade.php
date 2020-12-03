@@ -53,8 +53,8 @@
     <!-- plugins JS
 		============================================ -->
     <script src="{{asset('js/plugins.js')}}"></script>
-    <!-- main JS
+    <!-- Datatables JS
 		============================================ -->
-    <script src="{{asset('js/main.js')}}"></script>
     <script src="{{asset('js/dataTables.bootstrap4.min.js')}}"></script>
     <script src="{{asset('js/dataTables.min.js')}}"></script>
+    <script src="{{asset('js/main.js')}}"></script>
