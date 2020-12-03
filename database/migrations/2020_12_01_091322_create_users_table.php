@@ -22,6 +22,7 @@ class CreateUsersTable extends Migration
             $table->string('username', 50)->unique();
             $table->string('photo')->nullable();
             $table->string('password');
+            $table->integer('actif');
             $table->timestamp('banned_at', 0)->nullable();
             $table->rememberToken();
             $table->timestamps();
