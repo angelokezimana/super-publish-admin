@@ -12,6 +12,7 @@
                 <th>E-mail</th>
                 <th>Pseudo</th>
                 <th>R&ocirc;les</th>
+                <th>Bloqu&eacute;</th>
                 <th>Options</th>
             </tr>
         </thead>
@@ -24,15 +25,12 @@
                 <td>{{ $user->email }}</td>
                 <td>{{ $user->username }}</td>
                 <td>{{ $user->role->name }}</td>
+                <td>{{ $user->banned_at }}</td>
                 <td>
-                    @if( $user->id != Auth::user()->id)
-                    @can('Modifier Utilisateurs')
                     <a href="{{ route('users.edit', $user) }}" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="top" title="Modifier cet utilisateur">
                         <i class="fas fa-edit"></i>
                     </a>
-                    @endcan
 
-                    @can('Bloquer Utilisateurs')
                     <form action="{{ route('users.suspend', $user) }}" method="post" class="inline">
                         @csrf
                         @method('PUT')
@@ -47,9 +45,7 @@
                         </button>
                         @endif
                     </form>
-                    @endcan
 
-                    @can('Supprimer Utilisateurs')
                     <form action="{{ route('users.destroy', $user) }}" method="post" class="inline">
                         @csrf
                         @method('DELETE')
@@ -57,8 +53,6 @@
                             <i class="fas fa-trash-alt"></i>
                         </button>
                     </form>
-                    @endcan
-                    @endif
                 </td>
             </tr>
             @endforeach
