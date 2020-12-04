@@ -28,7 +28,7 @@
                             
                         </li>
                         <li>
-                            <a title="utilisateurs"  href="#" aria-expanded="false"><span class="fa fa-users"></span>  <span class="mini-click-non">Utilisateurs</span></a>                            
+                            <a title="utilisateurs"  href="{{ route('users.index') }}" aria-expanded="false"><span class="fa fa-users"></span>  <span class="mini-click-non">Utilisateurs</span></a>                            
                         </li>
                         <li>
                             <a class="has-arrow" href="#" aria-expanded="false"><span class="fa fa-trash-o"></span>  <span class="mini-click-non">Corbeilles</span></a>
