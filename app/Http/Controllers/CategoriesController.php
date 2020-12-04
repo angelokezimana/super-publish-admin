@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Categorie;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class CategoriesController extends Controller
 {
@@ -24,11 +26,11 @@ class CategoriesController extends Controller
         //
 
         $categories = DB::table('categories')
-        ->join('users', 'users.id','categories.user_create')               
-        ->get();
+            // ->join('users', 'users.id','categories.user_create')
+            ->select('categories.*')
+            ->get();
 
-      return view('categories/index', ['categories' => $categories ]);
-
+        return view('categories/index', ['categories' => $categories]);
     }
 
     /**
@@ -39,8 +41,8 @@ class CategoriesController extends Controller
     public function create()
     {
         //
-         
-           
+
+
     }
 
     /**
@@ -51,32 +53,21 @@ class CategoriesController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        $request->validate([
-            'membre' => ['required' ,'string', 'min:2'] ,
-            'montant' => ['required', 'numeric', 'min:1'],
-            'date_paiement' =>  ['required',  'max:' .date('d-m-Y')],
-            'categorie' => ['required' ,'string', 'min:2'],
-            'cooperative' => 'required',
-            'etat' => ['required' ,'string', 'min:2'],
-            // 'sortie' => ['min:date_adesion','max:'.date('d-m-Y')] 
-
-            
+        //    
+        $validator = Validator::make($request->all(), [
+            'namecategory' => ['required', 'string', 'min:2', 'unique:categories'],
         ]);
 
-        // $cooperative = DB::table('cooperatives')->where('mail',$request->mail);  
-        // if($cooperative == null)
-        // {
-               
+        if ($validator->fails()) {
+            return response()->json(array('errors' => $validator->getMessageBag()->toArray()));
+        }
         $categories = new Categorie();
-         $categories->namecategory = $request->name;
-         $categories->actif = '1';
-        //  $categories->user_create = null ;
-        //  $categories->user_update = ;      
-         $categories->save();
+        $categories->namecategory = $request->namecategory;
+        $categories->actif = '1';
+        $categories->save();
         //  }
-    
-         return redirect('categories')->withFlashMessage('categories ajoute avec success.');;
+        session()->flash('success', 'la categorie ajoutée avec success');
+        return response()->json($categories);
     }
 
     /**
@@ -85,7 +76,7 @@ class CategoriesController extends Controller
      * @param  \App\categories  $categories
      * @return \Illuminate\Http\Response
      */
-    public function show(categories $categories)
+    public function show(categorie $categories)
     {
         //
     }
@@ -96,9 +87,10 @@ class CategoriesController extends Controller
      * @param  \App\categories  $categories
      * @return \Illuminate\Http\Response
      */
-    public function edit(categories $categories)
+    public function edit(categorie $categories)
     {
         //
+
     }
 
     /**
@@ -108,9 +100,32 @@ class CategoriesController extends Controller
      * @param  \App\categories  $categories
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, categories $categories)
+    public function update(Request $request, Categorie $category)
     {
         //
+        // Validation
+
+        //   
+        $validator = Validator::make($request->all(), [
+            'namecategory' => [
+                'required',
+                'string',
+                'min:2',
+                Rule::unique('categories')->ignore($category->id)
+            ]
+
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(array('errors' => $validator->getMessageBag()->toArray()));
+        }
+
+        $category->namecategory = $request->namecategory;
+        $category->actif = '1';
+        $category->save();
+
+        session()->flash('success', 'la categorie modifiée avec success');
+        return response()->json($category);
     }
 
     /**
@@ -119,7 +134,7 @@ class CategoriesController extends Controller
      * @param  \App\categories  $categories
      * @return \Illuminate\Http\Response
      */
-    public function destroy(categories $categories)
+    public function destroy(Categorie $categories)
     {
         //
     }
