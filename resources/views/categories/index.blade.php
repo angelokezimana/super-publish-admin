@@ -33,7 +33,7 @@
     </div>
    
    
-    <div class="h1 text-center">Liste des utilisateurs</div>
+    <div class="h1 text-center">Liste des Categories</div>
      <div class="table-responsive">
         <table class="table table-bordered table-striped table-hover" id="dataTable" width="100%" cellspacing="0"> 
         <thead class="thead-warning ">
