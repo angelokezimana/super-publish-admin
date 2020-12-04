@@ -22,9 +22,6 @@ Auth::routes(['register' => false, 'reset' => false, 'confirm' => false]);
 Route::get('/home', 'HomeController@index')->name('home');
 
 //CRUD for categories
-Route::get('categories', 'CategoriesController@index');
-Route::get('categories/create', 'CategoriesController@create');
-Route::post('categories', 'CategoriesController@store');
+ Route::resource('categories', 'CategoriesController');
 
 Route::get('/users', 'UserController@index')->name('users.index')->middleware('role:admin');
-
