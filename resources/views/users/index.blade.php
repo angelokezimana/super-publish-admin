@@ -1,7 +1,16 @@
 @extends('templates.default')
 
 @section('content')
-<div class="h1 text-center">Liste des utilisateurs</div>
+<div class="container mb-2">
+    <p class="h1 text-center">Liste des utilisateurs</p>
+    <button type="button" class="mb-2 btn btn-primary btn-sm text-white btn-add-user" data-toggle="modal" data-target="#crud-modal-user">
+        <i class="fa fa-plus"></i> Cr&eacute;er un utilisateur
+    </button>
+    @if (session('success'))
+        <div class="alert alert-success"><i class="fa fa-check"></i> {{ session('success') }}</div>
+    @endif
+</div>
+
 <div class="table-responsive">
     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
         <thead>
