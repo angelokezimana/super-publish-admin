@@ -62,10 +62,11 @@ class UserController extends Controller
         $user->username = $request->username;
         $user->password = Hash::make($request->password);
         $user->role_id = $request->role_id;
+        $user->actif = '1';
 
         $user->save();
 
         session()->flash('success', 'Utilisateur ajouté avec succès !');
-        return response()->json('users.index');
+        return response()->json($user);
     }
 }
