@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -67,6 +68,43 @@ class UserController extends Controller
         $user->save();
 
         session()->flash('success', 'Utilisateur ajouté avec succès !');
+        return response()->json($user);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     * 
+     * @param  \App\Http\Requests\Request  $request
+     * @param  \App\Models\User  $user
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, User $user)
+    {
+        $validator = Validator::make($request->all(), [
+            'first_name' => ['required', 'string', 'max:50'],
+            'last_name' => ['required', 'string', 'max:50'],
+            'email' => ['required', 'string', 'email', 'max:50', Rule::unique('users')->ignore($user->id)],
+            'username' => ['required', 'string', 'max:30', Rule::unique('users')->ignore($user->id)],
+            'password' => ['nullable', 'string', 'min:8', 'confirmed'],
+            'role_id' => ['required'],
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(array('errors' => $validator->getMessageBag()->toArray()));
+        }
+
+        $user->first_name = $request->first_name;
+        $user->last_name = $request->last_name;
+        $user->email = $request->email;
+        $user->username = $request->username;
+        $user->role_id = $request->role_id;
+
+        if (!empty($request->password))
+            $user->password = Hash::make($request->password);
+
+        $user->save();
+
+        session()->flash('success', "L'utilisateur '{$user->first_name} {$user->last_name}' modifié avec succès!");
         return response()->json($user);
     }
 }
