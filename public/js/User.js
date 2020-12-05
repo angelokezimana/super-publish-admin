@@ -162,8 +162,6 @@ $(document).ready(function () {
         var last_name = $(this).data('last_name');
         var email = $(this).data('email');
         var username = $(this).data('username');
-        var password = $(this).data('password');
-        var password_confirmation = $(this).data('password_confirmation');
         var role_id = $(this).data('role_id');
 
         initialize_update();
@@ -259,6 +257,16 @@ $(document).ready(function () {
                     else {
                         $('#password + div').addClass('hidden');
                         $('#password').removeClass('is-invalid');
+                    }
+                    //role_id
+                    if (data.errors.role_id) {
+                        $('#role_id + div').removeClass('hidden');
+                        $('#role_id').addClass('is-invalid');
+                        $('#role_id + div').html("<i class=\"fa fa-exclamation-triangle mr-1\"></i>" + data.errors.role_id);
+                    }
+                    else {
+                        $('#role_id + div').addClass('hidden');
+                        $('#role_id').removeClass('is-invalid');
                     }
                 }
                 else {
