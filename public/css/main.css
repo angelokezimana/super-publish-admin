@@ -107,8 +107,9 @@ textarea {
     display: inline;
 }
 
-
-
+.mb-2 {
+    margin-bottom: 20px;
+}
 
 
 
