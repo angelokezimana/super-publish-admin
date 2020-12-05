@@ -133,6 +133,16 @@ $(document).ready(function () {
                         $('#password + div').addClass('hidden');
                         $('#password').removeClass('is-invalid');
                     }
+                    //role_id
+                    if (data.errors.role_id) {
+                        $('#role_id + div').removeClass('hidden');
+                        $('#role_id').addClass('is-invalid');
+                        $('#role_id + div').html("<i class=\"fa fa-exclamation-triangle mr-1\"></i>" + data.errors.role_id);
+                    }
+                    else {
+                        $('#role_id + div').addClass('hidden');
+                        $('#role_id').removeClass('is-invalid');
+                    }
                 }
                 else {
                     window.location.replace("/users");
