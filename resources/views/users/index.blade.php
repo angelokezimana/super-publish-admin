@@ -27,14 +27,14 @@
         </thead>
         <tbody>
             @foreach ($users as $user)
-            <tr>
+            <tr @if ($user->banned_at) class="bg-danger" @endif>
                 <th scope="row">{{ $loop->iteration }}</th>
                 <td>{{ $user->last_name }}</td>
                 <td>{{ $user->first_name }}</td>
                 <td>{{ $user->email }}</td>
                 <td>{{ $user->username }}</td>
                 <td>{{ $user->role->name }}</td>
-                <td>{!! $user->banned_at ?? '<label class="badge badge-info">Pas bloqu&eacute;</label>' !!}</td>
+                <td>{!! $user->banned_at ?? '<label class="badge">Pas bloqu&eacute;</label>' !!}</td>
                 <td>
 
                     <button type="button" class="btn btn-primary btn-sm text-white btn-edit-user" data-toggle="modal" data-target="#crud-modal-user" data-id="{{ $user->id }}" data-last_name="{{ $user->last_name }}" data-first_name="{{ $user->first_name }}" data-email="{{ $user->email }}" data-username="{{ $user->username }}" data-role_id="{{ $user->role->id }}" data-role_name="{{ $user->role->name }}">
