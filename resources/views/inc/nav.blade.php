@@ -38,7 +38,7 @@
                                                 <i class="fa fa-angle-down edu-icon edu-down-arrow color_i"></i>
                                             </a>
                                             <ul role="menu" class="dropdown-header-top author-log dropdown-menu animated zoomIn">
-                                                <li><a href="#"><span class="fa fa-user"></span>&nbsp; Mon Profil</a>
+                                                <li><a href="{{ route('users.profile') }}"><span class="fa fa-user"></span>&nbsp; Mon Profil</a>
                                                 </li>
                                                 <li>
                                                     <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
