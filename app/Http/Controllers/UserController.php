@@ -107,4 +107,30 @@ class UserController extends Controller
         session()->flash('success', "L'utilisateur '{$user->first_name} {$user->last_name}' modifié avec succès!");
         return response()->json($user);
     }
+
+    /**
+     * @param  \App\Models\User  $user
+     * @return \Illuminate\Http\Response
+     */
+    public function suspend(User $user)
+    {
+        $status = "{$user->first_name} {$user->last_name}";
+
+        if ($user->id == auth()->user()->id) {
+            abort(404);
+        }
+
+        if ($user->banned_at) {
+            $user->banned_at = null;
+            $status .= " débloqué(e) avec succès!";
+        } else {
+            $user->banned_at = Carbon::now();
+            $status .= " bloqué(e) avec succès!";
+        }
+
+        $user->save();
+
+        session()->flash('success', $status);
+        return redirect()->route('users.index');
+    }
 }
