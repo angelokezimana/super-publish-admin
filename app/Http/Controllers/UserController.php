@@ -133,4 +133,23 @@ class UserController extends Controller
         session()->flash('success', $status);
         return redirect()->route('users.index');
     }
+
+    /**
+     * Remove the specified resource from storage.
+     * 
+     * @param  \App\Models\User  $user
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(User $user)
+    {
+        if ($user->id == auth()->user()->id) {
+            abort(404);
+        }
+
+        $user->actif = 0;
+        $user->save();
+
+        session()->flash('success', "L'utilisateur '{$user->full_name}' supprimé avec succès!");
+        return redirect()->route('users.index');
+    }
 }
