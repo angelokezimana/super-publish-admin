@@ -32,3 +32,6 @@ Route::middleware('role:admin')->group(function () {
     Route::put('users/{user}/suspend', 'UserController@suspend')->name('users.suspend');
     Route::delete('/users/{user}', 'UserController@destroy')->name('users.destroy');
 });
+
+// CRUD for publications
+Route::resource('publications', 'PublicationController');
