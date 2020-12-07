@@ -22,6 +22,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 //CRUD for categories
  Route::resource('categories', 'CategoriesController');
+ Route::post('categories/destroy/{categorie}', 'CategoriesController@destroy');
 
 Route::get('/profile', 'UserController@profile')->name('users.profile');
 
