@@ -17,10 +17,10 @@ class CategoriesController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    // public function __construct()
-    // {
-    //     $this->middleware('auth');
-    // }
+     public function __construct()
+    {
+        $this->middleware('auth');
+    }
 
     public function index()
     {
@@ -68,7 +68,7 @@ class CategoriesController extends Controller
         $categories->actif = '1';
         $categories->save();
         //  }
-        session()->flash('success', 'la categorie ajoutée avec success');
+        session()->flash('success', "la categorie '{$categories->namecategory}'  ajoutée avec success");
         return response()->json($categories);
     }
 
@@ -126,7 +126,7 @@ class CategoriesController extends Controller
         $category->updated_by = Auth::user()->id;
         $category->save();
 
-        session()->flash('success', 'la categorie modifiée avec success');
+        session()->flash('success', "la categorie '{$category->namecategory}' modifiée avec success");
         return response()->json($category);
     }
 
@@ -145,7 +145,7 @@ class CategoriesController extends Controller
        $categories->actif = 0;
        $categories->save();
 
-         session()->flash('success', 'la categorie supprimée avec success');
+         session()->flash('success', "la categorie '{$categories->namecategory}' supprimée avec success");
          return redirect('categories');
         
 
