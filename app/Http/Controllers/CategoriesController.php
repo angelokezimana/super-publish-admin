@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Auth;
 
 class CategoriesController extends Controller
 {
@@ -23,12 +24,12 @@ class CategoriesController extends Controller
 
     public function index()
     {
-        //
-
+        //      
         $categories = DB::table('categories')
-            // ->join('users', 'users.id','categories.user_create')
-            ->select('categories.*')
-            ->get();
+             ->join('users', 'users.id','categories.created_by')
+             ->select(DB::raw('categories.id,categories.namecategory,categories.created_at,users.username'))
+             ->where('categories.actif','=',1)
+             ->get();
 
         return view('categories/index', ['categories' => $categories]);
     }
@@ -63,6 +64,7 @@ class CategoriesController extends Controller
         }
         $categories = new Categorie();
         $categories->namecategory = $request->namecategory;
+        $categories->created_by = Auth::user()->id;
         $categories->actif = '1';
         $categories->save();
         //  }
@@ -121,7 +123,7 @@ class CategoriesController extends Controller
         }
 
         $category->namecategory = $request->namecategory;
-        $category->actif = '1';
+        $category->updated_by = Auth::user()->id;
         $category->save();
 
         session()->flash('success', 'la categorie modifiée avec success');
@@ -136,6 +138,6 @@ class CategoriesController extends Controller
      */
     public function destroy(Categorie $categories)
     {
-        //
+        //       
     }
 }

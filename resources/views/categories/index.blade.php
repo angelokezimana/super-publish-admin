@@ -40,8 +40,9 @@
           <tr>
            
             <th >Numero</th>
-            <th > nom </th> 
-            <th >Date d'enregistrement</th> 
+            <th > nom </th>
+            <th >Enregistrer par </th>
+            <th >Date d'enregistrement</th>            
             <th >Action</th>          
           </tr>
         </thead>
@@ -51,8 +52,8 @@
             <tr>
                 <td><?= $i ?></td>
                 <td>{{$categorie->namecategory}}</td>
+                <td>{{$categorie->username}}</td>
                 <td>{{$categorie->created_at}}</td>
-
                 <td>                 
                    
                     <form action="categories/destroy/{{$categorie->id}}"  method="post">                 
