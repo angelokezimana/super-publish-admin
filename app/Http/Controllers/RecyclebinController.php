@@ -6,7 +6,7 @@ use App\Models\Role;
 use App\Models\Categorie;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
 
 class RecyclebinController extends Controller
 {
@@ -48,6 +48,21 @@ class RecyclebinController extends Controller
              ->get();
 
         return view('recyclebin/index_categories', ['categories' => $categories]);
+    }
+
+    public function restore_categories(Categorie $categorie)
+    {
+        //   
+        
+       $categories = Categorie::find($categorie->id);  
+       $categories->updated_by = Auth::user()->id;
+       $categories->actif = 1;
+       $categories->save();
+
+         session()->flash('success', "la categorie '{$categories->namecategory}' restaurée  savec success");
+         return redirect('categories_suppr');
+        
+
     }
 
 
