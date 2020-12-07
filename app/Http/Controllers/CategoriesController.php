@@ -136,8 +136,18 @@ class CategoriesController extends Controller
      * @param  \App\categories  $categories
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Categorie $categories)
+    public function destroy(Categorie $categorie)
     {
-        //       
+        //   
+        
+       $categories = Categorie::find($categorie->id);  
+       $categories->updated_by = Auth::user()->id;
+       $categories->actif = 0;
+       $categories->save();
+
+         session()->flash('success', 'la categorie supprimée avec success');
+         return redirect('categories');
+        
+
     }
 }
