@@ -1,7 +1,14 @@
 @extends('templates.default')
 
 @section('content')
-<div class="container mb-2">
+<ol class="breadcrumb">
+    <li><a href="#">
+            <em class="fa fa-home"></em>
+        </a></li>
+    <li class="active">Users Deleted</li>
+</ol>
+    
+<div class=" ">
     <p class="h1 text-center">Liste des utilisateurs supprimés</p>   
     @if (session('success'))
         <div class="alert alert-success"><i class="fa fa-check"></i> {{ session('success') }}</div>
