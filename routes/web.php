@@ -23,7 +23,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 //CRUD for categories
  Route::resource('categories', 'CategoriesController');
 
-Route::get('/users', 'UserController@index')->name('users.index')->middleware('role:admin');
+Route::get('/profile', 'UserController@profile')->name('users.profile');
+
 Route::middleware('role:admin')->group(function () {
     Route::get('/users', 'UserController@index')->name('users.index');
     Route::post('/users', 'UserController@store')->name('users.store');
