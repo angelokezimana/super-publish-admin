@@ -40,3 +40,4 @@ Route::post('users/restore/{user}', 'RecyclebinController@restore_users');
 
 //deleted categories
 Route::get('/categories_suppr', 'RecyclebinController@index_categories');
+Route::post('categories/restore/{categorie}', 'RecyclebinController@restore_categories');
