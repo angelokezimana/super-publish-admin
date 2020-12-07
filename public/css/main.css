@@ -103,6 +103,9 @@ textarea {
     padding-right: 5%;
 }
 
+.inline {
+    display: inline;
+}
 
 
 
