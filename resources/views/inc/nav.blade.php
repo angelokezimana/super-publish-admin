@@ -81,16 +81,16 @@
 
                                     </ul>
                                 </li>
-                                <li><a data-toggle="collapse" data-target="#demopro" href="#"><i class="fa fa-users"></i>&nbsp Utilisateurs <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
+                                <li><a herf="{{ route('users.index') }}" data-toggle="collapse" data-target="#demopro" href="#"><i class="fa fa-users"></i>&nbsp Utilisateurs <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
 
                                 </li>
-                                <li><a data-toggle="collapse" data-target="#democrou" href="#"><i class="fa fa-bar-chart"></i>&nbsp Rapports <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
+                                <li><a href="" data-toggle="collapse" data-target="#democrou" href="#"><i class="fa fa-bar-chart"></i>&nbsp Rapports <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
                                 </li>
                                 <li><a data-toggle="collapse" data-target="#demoevent" href="#"><i class="fa fa-trash-o"></i>&nbsp Corbeille <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
                                     <ul id="demoevent" class="collapse dropdown-header-top">
                                         <li><a href="#"><i class="fa fa-clone"></i>&nbsp Publications</a>
                                         </li>
-                                        <li><a href="#"><i class="fa fa-users"></i>&nbsp Utilisateurs</a>
+                                        <li><a href="{{ url('/users_suppr') }}"><i class="fa fa-users"></i>&nbsp Utilisateurs</a>
                                         </li>
                                         <li><a href="#"><i class="fa fa-list-alt"></i>&nbsp Categories</a>
                                         </li>
