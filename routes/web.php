@@ -37,3 +37,6 @@ Route::middleware('role:admin')->group(function () {
 //deleted user
 Route::get('/users_suppr', 'RecyclebinController@index_users');
 Route::post('users/restore/{user}', 'RecyclebinController@restore_users');
+
+//deleted categories
+Route::get('/categories_suppr', 'RecyclebinController@index_categories');
