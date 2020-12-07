@@ -20,6 +20,7 @@
                             <a title="Paramètres"class="has-arrow" href="#" aria-expanded="false"><span class="fa fa-cogs"></span> <span class="mini-click-non">Paramètres</span></a>
                             <ul class="submenu-angle" aria-expanded="false">
                                 <li><a title="categories" href="{{url('categories')}}"><span class="mini-sub-pro"><i class="fa fa-list-alt"></i>&nbsp Categories</span></a></li>
+                               
                                 
                             </ul>
                         </li>
