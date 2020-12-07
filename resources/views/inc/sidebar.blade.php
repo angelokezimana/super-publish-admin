@@ -14,7 +14,7 @@
                             </a>
                         </li>
                         <li>
-                            <a title="Publications" href="#" aria-expanded="false"><span class="fa fa-clone"></span> <span class="mini-click-non">Publications</span></a>
+                            <a title="Publications" href="{{ route('publications.index') }}" aria-expanded="false"><span class="fa fa-clone"></span> <span class="mini-click-non">Publications</span></a>
                         </li>
                         <li>
                             <a title="Paramètres"class="has-arrow" href="#" aria-expanded="false"><span class="fa fa-cogs"></span> <span class="mini-click-non">Paramètres</span></a>
