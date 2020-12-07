@@ -59,7 +59,7 @@
                     <form action="categories/destroy/{{$categorie->id}}"  method="post">                 
                     <a href="" class="btn btn-primary btn-edit-category" title="Editer" data-toggle="modal"
                     data-target="#formulaire" data-id="{{$categorie->id}}"  data-namecategory="{{$categorie->namecategory}}" ><i class="fa fa-edit"></i></a>                        
-                                     @csrf
+                                     @csrf                                   
                                     <button type="submit" onclick="return confirm('voulez-vous supprimer cette categorie ?')" class="btn btn-danger  btn-xs" title="Delete"><i class="fa  fa-trash-o"></i></button>
                                 </form>                     
                 </td>
