@@ -48,6 +48,8 @@
 		============================================ -->
     <link rel="stylesheet" href="{{ asset('css/metisMenu/metisMenu.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/metisMenu/metisMenu-vertical.css') }}">
+
+    <link rel="stylesheet" href="{{ asset('css/summernote/summernote.css') }}">
     <!-- style CSS
 		============================================ -->
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
