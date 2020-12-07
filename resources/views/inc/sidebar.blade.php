@@ -35,7 +35,7 @@
                             <ul class="submenu-angle" aria-expanded="false">
                                 <li><a title="Publications supprimées" href="#"><span class="mini-sub-pro"><i class="fa fa-clone"></i>&nbsp Publications</span></a></li>
                                 <li><a title="Utilisateurs supprimés" href="{{ url('/users_suppr') }}"><span class="mini-sub-pro"><i class="fa fa-users"></i>&nbsp Utilisateurs</span></a></li>
-                                <li><a title="Categories supprimés" href="#"><span class="mini-sub-pro"><i class="fa fa-list-alt"></i>&nbsp Categories</span></a></li>
+                                <li><a title="Categories supprimés" href="{{ url('/categories_suppr')}}"><span class="mini-sub-pro"><i class="fa fa-list-alt"></i>&nbsp Categories</span></a></li>
                             </ul>
                         </li>        
                     </ul>

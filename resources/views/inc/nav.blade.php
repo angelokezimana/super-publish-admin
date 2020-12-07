@@ -76,7 +76,7 @@
                                 <li><a href="#"><i class="fa fa-clone"></i>&nbsp Publication</a></li>
                                 <li><a data-toggle="collapse" data-target="#demoevent" href="#"><i class="fa fa-cogs"></i>&nbsp Paramètre <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
                                     <ul id="demoevent" class="collapse dropdown-header-top">
-                                        <li><a href="#"><i class="fa fa-list-alt"></i>&nbsp Categories</a>
+                                        <li><a href="{{url('categories')}}"><i class="fa fa-list-alt"></i>&nbsp Categories</a>
                                         </li>
 
                                     </ul>
@@ -92,7 +92,7 @@
                                         </li>
                                         <li><a href="#"><i class="fa fa-users"></i>&nbsp Utilisateurs</a>
                                         </li>
-                                        <li><a href="#"><i class="fa fa-list-alt"></i>&nbsp Categories</a>
+                                        <li><a href="{{ url('/categories_suppr')}}"><i class="fa fa-list-alt"></i>&nbsp Categories</a>
                                         </li>
 
                                     </ul>
