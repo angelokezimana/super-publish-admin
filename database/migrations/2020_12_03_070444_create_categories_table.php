@@ -16,16 +16,16 @@ class CreateCategoriesTable extends Migration
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
             $table->string('namecategory')->unique();
-            $table->unsignedBigInteger('user_create')->nullable();
-            $table->unsignedBigInteger('user_update')->nullable();
+            $table->unsignedBigInteger('created_by')->nullable();
+            $table->unsignedBigInteger('updated_by')->nullable();
             $table->integer('actif');
 
-            $table->foreign('user_create')
+            $table->foreign('created_by')
             ->references('id')
             ->on('users')
             ->onDelete('cascade');
 
-            $table->foreign('user_update')
+            $table->foreign('updated_by')
             ->references('id')
             ->on('users')
             ->onDelete('cascade');
