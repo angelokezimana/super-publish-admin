@@ -35,21 +35,10 @@
 		============================================ -->
     <script src="{{asset('js/metisMenu/metisMenu.min.js')}}"></script>
     <script src="{{asset('js/metisMenu/metisMenu-active.js')}}"></script>
-    <!-- morrisjs JS
+    <!-- summernote JS
 		============================================ -->
-    <script src="{{asset('js/morrisjs/raphael-min.js')}}"></script>
-    <script src="{{asset('js/morrisjs/morris.js')}}"></script>
-    <script src="{{asset('js/morrisjs/morris-active.js')}}"></script>
-    <!-- morrisjs JS
-		============================================ -->
-    <script src="{{asset('js/sparkline/jquery.sparkline.min.js')}}"></script>
-    <script src="{{asset('js/sparkline/jquery.charts-sparkline.js')}}"></script>
-    <script src="{{asset('js/sparkline/sparkline-active.js')}}"></script>
-    <!-- calendar JS
-		============================================ -->
-    <script src="{{asset('js/calendar/moment.min.js')}}"></script>
-    <script src="{{asset('js/calendar/fullcalendar.min.js')}}"></script>
-    <script src="{{asset('js/calendar/fullcalendar-active.js')}}"></script>
+    <script src="{{asset('js/summernote/summernote.min.js') }}"></script>
+    <script src="{{asset('js/summernote/summernote-active.js') }}"></script>
     <!-- plugins JS
 		============================================ -->
     <script src="{{asset('js/plugins.js')}}"></script>
