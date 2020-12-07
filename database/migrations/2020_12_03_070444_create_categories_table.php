@@ -18,6 +18,7 @@ class CreateCategoriesTable extends Migration
             $table->string('namecategory')->unique();
             $table->unsignedBigInteger('created_by')->nullable();
             $table->unsignedBigInteger('updated_by')->nullable();
+            $table->unsignedBigInteger('category_id')->nullable();
             $table->integer('actif');
 
             $table->foreign('created_by')
@@ -30,6 +31,11 @@ class CreateCategoriesTable extends Migration
             ->on('users')
             ->onDelete('cascade');
             $table->timestamps();
+
+            $table->foreign('category_id')
+            ->references('id')
+            ->on('categories')
+            ->onDelete('cascade');
         });
     }
 
