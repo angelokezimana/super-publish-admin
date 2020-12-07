@@ -33,7 +33,7 @@ class RecyclebinController extends Controller
         $user->save();
 
         session()->flash('success', "L'utilisateur '{$user->full_name}' restauré avec succès!");
-        return redirect('recyclebin/index_users');
+        return redirect('users_suppr');
     }
 
    
