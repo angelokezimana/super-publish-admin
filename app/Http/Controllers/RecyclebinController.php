@@ -23,7 +23,18 @@ class RecyclebinController extends Controller
             'roles' => $roles
         ]);
     }
-   
+    public function  restore_users(User $user)
+    {
+        if ($user->id == auth()->user()->id) {
+            abort(404);
+        }
+
+        $user->actif = 1;
+        $user->save();
+
+        session()->flash('success', "L'utilisateur '{$user->full_name}' restauré avec succès!");
+        return redirect('recyclebin/index_users');
+    }
 
    
 }
