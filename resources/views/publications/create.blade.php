@@ -9,10 +9,23 @@
     @endif
 </div>
 
-<form>
+<form action="{{ route('publications.store') }}" method="POST" enctype="multipart/form-data">
+    @csrf
     <div class="form-group">
         <label for="title" class="form-control-label">Titre</label>
         <input type="text" id="title" name="title" placeholder="Entrez le titre" class="form-control form-control-sm">
+    </div>
+    <div class="form-group">
+        <label for="customFile" class="form-control-label">Photo</label>
+        <div class="custom-file">
+            <input type="file" name="photo" class="custom-file-input" id="customFile">
+            <label class="custom-file-label" for="customFile">Choose file</label>
+            @error('event_image')
+            <div class="alert alert-danger">
+                <i class="fas fa-exclamation-triangle mr-1"></i>{{$message}}
+            </div>
+            @enderror
+        </div>
     </div>
     <div class="form-group">
         <label for="category_id" class="form-control-label">cat&eacute;gorie</label>
@@ -24,12 +37,21 @@
         </select>
     </div>
     <div class="form-group">
-        <label for="summernote" class="form-control-label">Contenu</label>
-        <textarea id="summernote" name="content"></textarea>
+        <label for="editor" class="form-control-label">Contenu</label>
+        <textarea id="editor" name="content"></textarea>
     </div>
 
-    <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Annuler</button>
-    <button type="button" id="id-form" class="btn btn-primary btn-sm crud-modal-user-form">Cr&eacute;er</button>
+    <button type="reset" class="btn btn-secondary btn-sm">Annuler</button>
+    <button type="submit" id="id-form" class="btn btn-primary btn-sm crud-modal-user-form">Cr&eacute;er</button>
 </form>
 
+@endsection
+@section('scripts')
+<script src="{{asset('js/Publication.js')}}"></script>
+<script>
+    CKEDITOR.replace('editor', {
+        filebrowserUploadUrl: "{{route('upload', ['_token' => csrf_token() ])}}",
+        filebrowserUploadMethod: 'form'
+    });
+</script>
 @endsection
