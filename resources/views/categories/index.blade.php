@@ -40,7 +40,7 @@
           <tr>
            
             <th >Numero</th>
-            <th > nom </th>
+            <th >Nom </th>           
             <th >Enregistrer par </th>
             <th >Date d'enregistrement</th>            
             <th >Action</th>          
@@ -51,14 +51,16 @@
             @foreach($categories as $categorie)           
             <tr>
                 <td><?= $i ?></td>
-                <td>{{$categorie->namecategory}}</td>
+                <td>{{$categorie->namecategory}}
+                  <br> {{$categorie->category_id}}
+                </td>
                 <td>{{$categorie->username}}</td>
                 <td>{{$categorie->created_at}}</td>
                 <td>                 
                    
                     <form action="categories/destroy/{{$categorie->id}}"  method="post">                 
                     <a href="" class="btn btn-primary btn-edit-category" title="Editer" data-toggle="modal"
-                    data-target="#formulaire" data-id="{{$categorie->id}}"  data-namecategory="{{$categorie->namecategory}}" ><i class="fa fa-edit"></i></a>                        
+                    data-target="#formulaire" data-id="{{$categorie->id}}"  data-namecategory="{{$categorie->namecategory}}" data-category_id="{{$categorie->category_id}}" ><i class="fa fa-edit"></i></a>                        
                                      @csrf                                   
                                     <button type="submit" onclick="return confirm('voulez-vous supprimer cette categorie ?')" class="btn btn-danger  btn-xs" title="Delete"><i class="fa  fa-trash-o"></i></button>
                                 </form>                     
