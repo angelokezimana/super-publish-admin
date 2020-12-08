@@ -37,8 +37,8 @@
     <script src="{{asset('js/metisMenu/metisMenu-active.js')}}"></script>
     <!-- summernote JS
 		============================================ -->
-    <script src="{{asset('js/summernote/summernote.min.js') }}"></script>
-    <script src="{{asset('js/summernote/summernote-active.js') }}"></script>
+    {{-- <script src="{{asset('js/summernote/summernote.min.js') }}"></script>
+    <script src="{{asset('js/summernote/summernote-active.js') }}"></script> --}}
     <!-- plugins JS
 		============================================ -->
     <script src="{{asset('js/plugins.js')}}"></script>
