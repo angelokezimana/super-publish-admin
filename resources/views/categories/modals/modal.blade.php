@@ -9,7 +9,7 @@
                 </button>
           </div>
           <div class="modal-body row">
-          <form>
+          <form  method="">
                 <input type="hidden" name="category_id" id="category_id">
                 <div class="modal-body">
                     <div class="hidden alert alert-success"></div>
@@ -19,6 +19,14 @@
                             placeholder="Entrer le nom de la cat&eacute;gorie (ex. sport, actualite, ...)"
                             class="form-control form-control-sm">
                         <div class="alert alert-danger hidden"></div>
+                        <label for="category_id_id" class="form-control-label">Nom global de la categorie</label>
+                        <select name="category_id_id" id="category_id_id" class="form-control form-control-sm">
+                                <option value="">Choisissez le nom</option>
+                                @foreach($categories as $category)
+                                    <option value="{{ $category->id }}">{{ $category->namecategory }}</option>
+                                @endforeach
+                            </select>
+                            <div class="alert alert-danger hidden"></div>              
                     </div>
                    
                 </div>
