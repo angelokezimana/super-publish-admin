@@ -21,7 +21,7 @@ Auth::routes(['register' => false, 'reset' => false, 'confirm' => false]);
 Route::get('/home', 'HomeController@index')->name('home');
 
 //CRUD for categories
- Route::resource('categories', 'CategoriesController');
+Route::resource('categories', 'CategoriesController');
 
 Route::get('/profile', 'UserController@profile')->name('users.profile');
 
@@ -34,4 +34,5 @@ Route::middleware('role:admin')->group(function () {
 });
 
 // CRUD for publications
+Route::post('upload_image', 'PublicationController@uploadImage')->name('upload');
 Route::resource('publications', 'PublicationController');
