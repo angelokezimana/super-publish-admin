@@ -64,6 +64,8 @@
     <script src="{{asset('js/dataTables.bootstrap4.min.js')}}"></script>
     <script src="{{ asset('js/sb-admin-2.min.js') }}"></script>
     <script src="{{ asset('js/chosen.jquery.min.js') }}"></script>
+    <script src="{{ asset('js/main.js') }}"></script>
+    @yield('scripts')
 </body>
 
 </html>
