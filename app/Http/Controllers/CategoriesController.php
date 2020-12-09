@@ -17,19 +17,19 @@ class CategoriesController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    // public function __construct()
-    // {
-    //     $this->middleware('auth');
-    // }
+     public function __construct()
+    {
+        $this->middleware('auth');
+    }
 
     public function index()
     {
         //      
         $categories = DB::table('categories')
              ->join('users', 'users.id','categories.created_by')
-             ->select(DB::raw('categories.id,categories.namecategory,categories.created_at,users.username'))
+             ->select(DB::raw('categories.id,categories.category_id,categories.namecategory,categories.created_at,users.username'))
              ->where('categories.actif','=',1)
-             ->get();
+             ->get();           
 
         return view('categories/index', ['categories' => $categories]);
     }
@@ -57,6 +57,7 @@ class CategoriesController extends Controller
         //    
         $validator = Validator::make($request->all(), [
             'namecategory' => ['required', 'string', 'min:2', 'unique:categories'],
+           
         ]);
 
         if ($validator->fails()) {
@@ -66,9 +67,10 @@ class CategoriesController extends Controller
         $categories->namecategory = $request->namecategory;
         $categories->created_by = Auth::user()->id;
         $categories->actif = '1';
+         $categories->category_id = $request->category_id;
         $categories->save();
         //  }
-        session()->flash('success', 'la categorie ajoutée avec success');
+        session()->flash('success', "la categorie '{$categories->namecategory}'  ajoutée avec success");
         return response()->json($categories);
     }
 
@@ -106,14 +108,14 @@ class CategoriesController extends Controller
     {
         //
         // Validation
-
         //   
         $validator = Validator::make($request->all(), [
             'namecategory' => [
                 'required',
                 'string',
                 'min:2',
-                Rule::unique('categories')->ignore($category->id)
+                Rule::unique('categories')->ignore($category->id),
+           
             ]
 
         ]);
@@ -123,10 +125,11 @@ class CategoriesController extends Controller
         }
 
         $category->namecategory = $request->namecategory;
-        $category->updated_by = Auth::user()->id;
+        $category->updated_by = Auth::user()->id;        
+        $category->category_id = $request->category_id;
         $category->save();
 
-        session()->flash('success', 'la categorie modifiée avec success');
+        session()->flash('success', "la categorie '{$category->namecategory}' modifiée avec success");
         return response()->json($category);
     }
 
@@ -136,8 +139,18 @@ class CategoriesController extends Controller
      * @param  \App\categories  $categories
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Categorie $categories)
+    public function destroy(Categorie $categorie)
     {
-        //       
+        //   
+        
+       $categories = Categorie::find($categorie->id);  
+       $categories->updated_by = Auth::user()->id;
+       $categories->actif = 0;
+       $categories->save();
+
+         session()->flash('success', "la categorie '{$categories->namecategory}' supprimée avec success");
+         return redirect('categories');
+        
+
     }
 }

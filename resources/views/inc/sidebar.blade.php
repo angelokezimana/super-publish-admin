@@ -20,6 +20,7 @@
                             <a title="Paramètres"class="has-arrow" href="#" aria-expanded="false"><span class="fa fa-cogs"></span> <span class="mini-click-non">Paramètres</span></a>
                             <ul class="submenu-angle" aria-expanded="false">
                                 <li><a title="categories" href="{{url('categories')}}"><span class="mini-sub-pro"><i class="fa fa-list-alt"></i>&nbsp Categories</span></a></li>
+                               
                                 
                             </ul>
                         </li>
@@ -34,8 +35,8 @@
                             <a class="has-arrow" href="#" aria-expanded="false"><span class="fa fa-trash-o"></span>  <span class="mini-click-non">Corbeilles</span></a>
                             <ul class="submenu-angle" aria-expanded="false">
                                 <li><a title="Publications supprimées" href="#"><span class="mini-sub-pro"><i class="fa fa-clone"></i>&nbsp Publications</span></a></li>
-                                <li><a title="Utilisateurs supprimés" href="#"><span class="mini-sub-pro"><i class="fa fa-users"></i>&nbsp Utilisateurs</span></a></li>
-                                <li><a title="Categories supprimés" href="#"><span class="mini-sub-pro"><i class="fa fa-list-alt"></i>&nbsp Categories</span></a></li>
+                                <li><a title="Utilisateurs supprimés" href="{{ url('/users_suppr') }}"><span class="mini-sub-pro"><i class="fa fa-users"></i>&nbsp Utilisateurs</span></a></li>
+                                <li><a title="Categories supprimés" href="{{ url('/categories_suppr')}}"><span class="mini-sub-pro"><i class="fa fa-list-alt"></i>&nbsp Categories</span></a></li>
                             </ul>
                         </li>        
                     </ul>

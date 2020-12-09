@@ -5,12 +5,19 @@
         $('#namecategory + div').addClass('hidden');
         $('#namecategory').removeClass('is-invalid');
 
+        $("#category_id_id").val("");
+        $('#category_id_id + div').addClass('hidden');
+        $('#category_id_id').removeClass('is-invalid');
+
     }
 
      //Initialize update data
      function initialize_update() {
         $('#namecategory + div').addClass('hidden');      
-        $('#namecategory').removeClass('is-invalid');    
+        $('#namecategory').removeClass('is-invalid'); 
+           
+        $('#category_id_id + div').addClass('hidden');
+        $('#category_id_id').removeClass('is-invalid');
     }
 
     //Button Add Category
@@ -26,12 +33,14 @@
     //Store Category in form
     $(document).on('click', '#store-category-form', function () {
         var namecategory = $("#namecategory").val();
+        var category_id = $("#category_id_id").val();
 
         $.ajax({
             type: 'POST',
             url: '/categories',
             data: {
                 namecategory: namecategory,
+                category_id :  category_id,
 
             },
             success: function (data) {
@@ -67,7 +76,7 @@
     $(document).on('click', '.btn-edit-category', function () {
         var id = $(this).data('id');
         var namecategory = $(this).data('namecategory');
-
+        var category_id = $(this).data('category_id');
 
         initialize_update();
 
@@ -78,6 +87,7 @@
         $('.crud-modal-category-form').attr("id", "update-category-form");
         $("#category_id").val(id);
         $("#namecategory").val(namecategory);
+        $("#category_id_id").val(category_id);
 
     });
 
@@ -85,7 +95,7 @@
     $(document).on('click', '#update-category-form', function () {
         var id = $("#category_id").val();
         var namecategory = $("#namecategory").val();
-      
+        var category_id = $("#category_id_id").val();
 
         $.ajax({
             type: 'POST',
@@ -94,7 +104,7 @@
                 _method: 'PUT',
 
                 namecategory: namecategory,
-
+                category_id: category_id,
             },
             success: function (data) {
                 if (data.errors) {
