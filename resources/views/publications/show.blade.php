@@ -3,11 +3,16 @@
 @section('content')
 <div class="container-fluid">
     <!-- Page Heading -->
-    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-2 text-gray-800 text-center">
-            {{ $publication->title }} |
-            {{ $publication->created_at }} |
-            {{ $publication->category->namecategory }} |
+    <div class="mb-4 text-muted">
+        <h1 class="h3 mb-2 text-gray-800">
+            {{ $publication->title }}
+        </h1>
+        {{ $publication->created_at }}
+        <p>
+            Ecrit par: {{ $publication->creator->username }}<br>
+            Cat&eacute;gorie: <span class="badge badge-success">{{ $publication->category->namecategory }}</span>
+        </p>
+        <div>
             <a href="{{ route('publications.edit', $publication) }}" class="btn btn-primary btn-sm">
                 Modifier
             </a>
@@ -19,7 +24,7 @@
                     Supprimer
                 </button>
             </form>
-        </h1>
+        </div>
     </div>
 
     @if (session('success'))
