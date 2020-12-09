@@ -78,3 +78,7 @@ body {
     font-size: 14px;
     color: #919aa3; }
 
+/* custom css */
+.fa-rotate-15 {
+    transform: rotate(-15deg);
+}

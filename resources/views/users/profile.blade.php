@@ -1,44 +1,60 @@
 @extends('templates.default')
 
 @section('content')
-<div class="container mb-2">
-    <p class="h1 text-center">Mon profil</p>
-    <button type="button" class="mb-2 btn btn-primary btn-sm text-white btn-add-user" data-toggle="modal" data-target="#crud-modal-user">
-        <i class="fa fa-plus"></i> Modifier mes informations
-    </button>
+<div class="container-fluid">
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <div class="h3 mb-2 text-gray-800">
+            Mon profil
+            <button type="button" class="mb-2 btn btn-primary btn-sm text-white btn-add-user" data-toggle="modal"
+                data-target="#crud-modal-user">
+                <i class="fas fa-plus mr-1"></i> Modifier mes informations
+            </button>
+        </div>
+    </div>
+
     @if (session('success'))
-        <div class="alert alert-success"><i class="fa fa-check"></i> {{ session('success') }}</div>
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <i class="fa fa-check mr-1"></i> {{ session('success') }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
     @endif
-</div>
 
-<div class="row mb-2">
-    <div class="col-md-3">
-        <p class="text-muted">Nom:</p>
-        <p>{{ $user->last_name }}</p>
-    </div>
-    <div class="col-md-3">
-        <p class="text-muted">Pr&eacute;nom:</p>
-        <p>{{ $user->first_name }}</p>
-    </div>
-    <div class="col-md-3">
-        <p class="text-muted">E-mail:</p>
-        <p>{{ $user->email }}</p>
-    </div>
-    <div class="col-md-3">
-        <p class="text-muted">Pseudo:</p>
-        <p>{{ $user->username }}</p>
+    <div class="card shadow mb-4 border-bottom-primary">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-borderless w-auto">
+                    <tbody class="h4">
+                        <tr>
+                            <td>Nom</td>
+                            <td>: {{ $user->last_name }}</td>
+                        </tr>
+                        <tr>
+                            <td>Pr&eacute;nom</td>
+                            <td>: {{ $user->first_name }}</td>
+                        </tr>
+                        <tr>
+                            <td>E-mail</td>
+                            <td>: {{ $user->email }}</td>
+                        </tr>
+                        <tr>
+                            <td>Pseudo</td>
+                            <td>: {{ $user->username }}</td>
+                        </tr>
+                        <tr>
+                            <td>R&ocirc;le</td>
+                            <td>: {{ $user->role->name }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 </div>
-<div class="row">
-    <div class="col-md-4">
-        <p class="text-muted">R&ocirc;le:</p>
-        <p>{{ $user->role->name }}</p>
-    </div>
-</div>
-
-{{-- @include('users.partials.crud-modal-user') --}}
 @endsection
 
 @section('scripts')
-    <script src="{{asset('js/User.js')}}"></script>
+<script src="{{asset('js/user.js')}}"></script>
 @endsection
