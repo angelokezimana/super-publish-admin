@@ -13,7 +13,7 @@
 
     <!-- Nav Item - Dashboard -->
     <li class="nav-item">
-        <a class="nav-link" href="#">
+        <a class="nav-link" href="{{ route('home') }}">
             <i class="fas fa-fw fa-home"></i>
             <span>Accueil</span>
         </a>
