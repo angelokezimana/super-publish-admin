@@ -159,11 +159,20 @@ class PublicationController extends Controller
 
             $CKEditorFuncNum = $request->input('CKEditorFuncNum');
             $url = asset('storage/images/' . $fileName);
-            $msg = 'Image uploaded successfully';
+            $msg = 'Image uploadée avec succès';
             $response = "<script>window.parent.CKEDITOR.tools.callFunction($CKEditorFuncNum, '$url', '$msg')</script>";
 
             @header('Content-type: text/html; charset=utf-8');
             echo $response;
         }
+    }
+
+    public function destroy(Publication $publication)
+    {
+        $publication->actif = 0;
+        $publication->save();
+
+        session()->flash('success', "La publication '{$publication->title}' supprimée avec succès!");
+        return redirect()->route('publications.index');
     }
 }
