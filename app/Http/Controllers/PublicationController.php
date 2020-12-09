@@ -101,6 +101,52 @@ class PublicationController extends Controller
         return view('publications.show', ['publication' => $publication]);
     }
 
+    public function edit(Publication $publication)
+    {
+        $categories = Categorie::all();
+
+        return view('publications.edit', [
+            'publication' => $publication,
+            'categories' => $categories
+        ]);
+    }
+
+    public function update(Request $request, Publication $publication)
+    {
+        $request->validate([
+            'content' => 'required',
+            'title' => 'required',
+            'category_id' => 'required',
+            'photo' => 'nullable|mimes:jpeg,png|max:10240',
+        ]);
+
+        if ($request->hasFile('photo')) {
+            if ($request->file('photo')->isValid()) {
+
+                $photo = 'publish-image-' . time() . '.' . $request->photo->extension();
+
+                $image = Image::make($request->photo->path());
+
+                $image->resize(300, 300, function ($constraint) {
+                    $constraint->aspectRatio();
+                })->save(public_path('storage/images') . '/' . $photo);
+
+                $publication->photo = $photo;
+            }
+        }
+
+        $publication->title = $request->title;
+        $publication->content = $request->content;
+        $publication->category_id = $request->category_id;
+        $publication->updated_by = Auth::id();
+
+
+        $publication->save();
+
+        session()->flash('success', "La publication '{$publication->title}' modifiée avec succès!");
+        return redirect()->route('publications.index');
+    }
+
     public function uploadImage(Request $request)
     {
         if ($request->hasFile('upload')) {
