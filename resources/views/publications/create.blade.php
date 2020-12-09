@@ -13,16 +13,21 @@
     @csrf
     <div class="form-group">
         <label for="title" class="form-control-label">Titre</label>
-        <input type="text" id="title" name="title" placeholder="Entrez le titre" class="form-control form-control-sm">
+        <input type="text" id="title" name="title" placeholder="Entrez le titre" value="{{ old("title") }}" class="form-control form-control-sm">
+        @error('title')
+        <div class="alert alert-danger">
+            <i class="fa fa-exclamation-triangle mr-1"></i>{{$message}}
+        </div>
+        @enderror
     </div>
     <div class="form-group">
-        <label for="customFile" class="form-control-label">Photo</label>
+        <label for="customFile" class="form-control-label">Photo de couverture</label>
         <div class="custom-file">
             <input type="file" name="photo" class="custom-file-input" id="customFile">
             <label class="custom-file-label" for="customFile">Choose file</label>
-            @error('event_image')
+            @error('photo')
             <div class="alert alert-danger">
-                <i class="fas fa-exclamation-triangle mr-1"></i>{{$message}}
+                <i class="fa fa-exclamation-triangle mr-1"></i>{{$message}}
             </div>
             @enderror
         </div>
@@ -32,13 +37,24 @@
         <select id="category_id" name="category_id" class="form-control">
             <option value="">Veuillez s&eacute;lectionner le type de cette publication</option>
             @foreach($categories as $category)
-            <option value="{{ $category->id }}">{{ $category->namecategory }}</option>
+            <option value="{{ $category->id }}" {!! old('category_id')==$category->id ?
+                'selected="selected"' : '' !!}>{{ $category->namecategory }}</option>
             @endforeach
         </select>
+        @error('category_id')
+        <div class="alert alert-danger">
+            <i class="fas fa-exclamation-triangle mr-1"></i>{{$message}}
+        </div>
+        @enderror
     </div>
     <div class="form-group">
         <label for="editor" class="form-control-label">Contenu</label>
-        <textarea id="editor" name="content"></textarea>
+        <textarea id="editor" name="content">{{ old('content') }}</textarea>
+        @error('content')
+        <div class="alert alert-danger">
+            <i class="fa fa-exclamation-triangle mr-1"></i>{{$message}}
+        </div>
+        @enderror
     </div>
 
     <button type="reset" class="btn btn-secondary btn-sm">Annuler</button>
