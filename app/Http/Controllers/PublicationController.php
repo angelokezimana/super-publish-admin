@@ -144,7 +144,7 @@ class PublicationController extends Controller
         $publication->save();
 
         session()->flash('success', "La publication '{$publication->title}' modifiée avec succès!");
-        return redirect()->route('publications.index');
+        return redirect()->route('publications.show', $publication);
     }
 
     public function uploadImage(Request $request)
