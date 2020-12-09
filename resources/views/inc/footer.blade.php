@@ -1,11 +1,9 @@
-<div class="footer-copyright-area mt-custom">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="footer-copy-right">
-                    <p>Copyright © {{ date('Y') }}. All rights reserved.</p>
-                </div>
-            </div>
-        </div>
+<!-- Footer -->
+<footer class="sticky-footer bg-white">
+    <div class="container my-auto">
+      <div class="copyright text-center my-auto">
+        <span>Copyright &copy; {{ date('Y') != '2020' ? '2020-' : '' }}{{ date('Y') }} &middot; <a href="#">{{ config('app.name') }}</a></span>
+      </div>
     </div>
-</div>
+</footer>
+<!-- End of Footer -->

@@ -1,22 +1,13 @@
 @extends('templates.default')
 
 @section('content')
-<div class="container mb-2">
-    <p class="h1 text-center mb-2">{{ $publication->title }}</p>
-
-    @if (session('success'))
-    <div class="alert alert-success mb-2"><i class="fa fa-check"></i> {{ session('success') }}</div>
-    @endif
-
-    <div class="card rounded shadow bg-white border-bottom-primary">
-        <div class="mw-100">
-            <img src="{{ asset('storage/images/'.$publication->photo) }}" alt="{{ $publication->title }}"
-                class="w-100 rounded-top">
-        </div>
-        <p class="bg-dark text-white text-center rounded-bottom pb-2">
-            {{ $publication->created_at }}
-        </p>
-        <p>
+<div class="container-fluid">
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-2 text-gray-800 text-center">
+            {{ $publication->title }} |
+            {{ $publication->created_at }} |
+            {{ $publication->category->namecategory }} |
             <a href="{{ route('publications.edit', $publication) }}" class="btn btn-primary btn-sm">
                 Modifier
             </a>
@@ -28,16 +19,17 @@
                     Supprimer
                 </button>
             </form>
-        </p>
-        <p class="h5 pl-2 pt-2">
-            {{ $publication->title }}
-        </p>
+        </h1>
+    </div>
 
-        <p class="pl-2 pt-2">
-            <span class="badge badge-info">Cat&eacute;gorie</span> {{ $publication->category->namecategory }} <br>
-        </p>
+    @if (session('success'))
+    <div class="alert alert-success mb-2"><i class="fa fa-check"></i> {{ session('success') }}</div>
+    @endif
 
-        {!! $publication->content !!}
+    <div class="card shadow mb-4 border-bottom-primary">
+        <div class="card-body">
+            {!! $publication->content !!}
+        </div>
     </div>
 </div>
 

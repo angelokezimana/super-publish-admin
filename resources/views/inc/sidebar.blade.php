@@ -1,47 +1,95 @@
-<div class="left-sidebar-pro">
-        <nav id="sidebar" class="">
-             <div class="image_div">
-                <a> <img class="main-logo image_responsive" src="{{ asset('img/logo/logo.jpg') }}" alt="" /></a>
-                <!-- <strong><a href="#"><img src="{{ asset('img/logo/logo.jpg') }}" alt="" /></a></strong>  -->
-            </div> 
-            <div class="left-custom-menu-adp-wrap comment-scrollbar">
-                <nav class="sidebar-nav left-sidebar-menu-pro">              
-                    <ul class="metismenu" id="menu1">
-                        <li class="active">
-                            <a title="tableau de bord ">
-								   
-								   <span class="fa fa-home"></span><span class="mini-click-non">Tableau de bord</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a title="Publications" href="{{ route('publications.index') }}" aria-expanded="false"><span class="fa fa-clone"></span> <span class="mini-click-non">Publications</span></a>
-                        </li>
-                        <li>
-                            <a title="Paramètres"class="has-arrow" href="#" aria-expanded="false"><span class="fa fa-cogs"></span> <span class="mini-click-non">Paramètres</span></a>
-                            <ul class="submenu-angle" aria-expanded="false">
-                                <li><a title="categories" href="{{url('categories')}}"><span class="mini-sub-pro"><i class="fa fa-list-alt"></i>&nbsp Categories</span></a></li>
-                               
-                                
-                            </ul>
-                        </li>
-                        <li>
-                            <a title="Rapports" class="" href="#" aria-expanded="false"><span class="fa fa-bar-chart"></span> <span class="mini-click-non">Rapports</span></a>
-                            
-                        </li>
-                        <li>
-                            <a title="utilisateurs"  href="{{ route('users.index') }}" aria-expanded="false"><span class="fa fa-users"></span>  <span class="mini-click-non">Utilisateurs</span></a>                            
-                        </li>
-                        <li>
-                            <a class="has-arrow" href="#" aria-expanded="false"><span class="fa fa-trash-o"></span>  <span class="mini-click-non">Corbeilles</span></a>
-                            <ul class="submenu-angle" aria-expanded="false">
-                                <li><a title="Publications supprimées" href="#"><span class="mini-sub-pro"><i class="fa fa-clone"></i>&nbsp Publications</span></a></li>
-                                <li><a title="Utilisateurs supprimés" href="{{ url('/users_suppr') }}"><span class="mini-sub-pro"><i class="fa fa-users"></i>&nbsp Utilisateurs</span></a></li>
-                                <li><a title="Categories supprimés" href="{{ url('/categories_suppr')}}"><span class="mini-sub-pro"><i class="fa fa-list-alt"></i>&nbsp Categories</span></a></li>
-                            </ul>
-                        </li>        
-                    </ul>
-                </nav>
-            </div>
-        </nav>
+<!-- Sidebar -->
+<ul class="navbar-nav bg-gray-100 sidebar sidebar-dark accordion border-right" id="accordionSidebar">
+    <!-- Sidebar - Brand -->
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ route('home') }}">
+        <div class="sidebar-brand-icon rotate-n-15">
+            <i class="fas fa-newspaper"></i>
+        </div>
+        <div class="sidebar-brand-text mx-3">{{ config('app.name') }}</div>
+    </a>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider my-0">
+
+    <!-- Nav Item - Dashboard -->
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('home') }}">
+            <i class="fas fa-fw fa-home"></i>
+            <span>Accueil</span>
+        </a>
+    </li>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider">
+
+    <!-- Heading -->
+    <div class="sidebar-heading">
+        <i class="fas fa-fw fa-tachometer-alt"></i>
+        <span>Tableau de bord</span>
     </div>
-    
+
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('publications.index') }}">
+            <i class="fas fa-fw fa-clone"></i><span>Publications</span>
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link" href="{{url('categories')}}">
+            <i class="fas fa-fw fa-list-alt"></i><span>Categories</span>
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('users.index') }}">
+            <i class="fas fa-fw fa-users"></i><span>Utilisateurs</span>
+        </a>
+    </li>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider">
+
+    <!-- Heading -->
+    <div class="sidebar-heading">
+        <i class="fas fa-tools"></i>
+        <span>Outils</span>
+    </div>
+
+    <li class="nav-item">
+        <a class="nav-link" href="#">
+            <i class="fas fa-fw fa-chart-bar"></i><span>Rapports</span>
+        </a>
+    </li>
+
+    <li class="nav-item">
+
+        <a href="#" class="nav-link collapsed" data-toggle="collapse" data-target="#collapseDeletedData"
+            aria-expanded="true" aria-controls="collapseDeletedData">
+            <i class="fas fa-fw fa-trash-alt"></i>
+            <span>Corbeilles</span>
+        </a>
+
+        <div id="collapseDeletedData" class="collapse" aria-labelledby="headingDeletedData"
+            data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Corbeilles:</h6>
+
+                <a class="collapse-item" href="#">Publications</a>
+
+                <a class="collapse-item" href="{{ url('/users_suppr') }}">Utilisateurs</a>
+
+                <a class="collapse-item" href="{{ url('/categories_suppr')}}">Categories</a>
+
+            </div>
+        </div>
+    </li>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider d-none d-md-block">
+
+    <!-- Sidebar Toggler (Sidebar) -->
+    <div class="text-center d-none d-md-inline">
+        <button class="rounded-circle border-0" id="sidebarToggle"></button>
+    </div>
+
+</ul>
