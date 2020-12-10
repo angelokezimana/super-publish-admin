@@ -1,0 +1,62 @@
+.inline {
+    display: inline;
+}
+.hidden {
+    display: none;
+}
+.vertical-line {
+    display: inline-block;
+    border-left: 1px solid #ccc;
+    margin: 0 10px;
+    height: 125px;
+}
+.custom-font-size {
+    font-size: medium;
+    font-weight: bold;
+}
+.bg-login{
+    background-color: #659DBD;
+    background-image: linear-gradient(180deg, #ccc 1%, #659DBD 50%, #4e73df 90%);
+    background-size: cover;
+}
+.table-borderless th {
+    border-bottom: 1px solid #dee2e6 !important;
+}
+
+/*Redesign Sidebar*/
+.sidebar-dark .sidebar-brand {
+    color: #2012bf;
+}
+.sidebar-dark hr.sidebar-divider {
+    border-top: 1px solid rgba(66, 61, 61, 0.78);
+}
+.sidebar-dark .nav-item.active .nav-link {
+    color: #000;
+}
+.sidebar-dark .nav-item.active .nav-link i {
+    color: #000;
+}
+.sidebar-dark .sidebar-heading {
+    color: rgba(0, 0, 0, 0.4);
+}
+.sidebar-dark .nav-item .nav-link {
+    color: rgba(0, 0, 0, 0.8);
+}
+.sidebar-dark .nav-item .nav-link i {
+    color: rgba(0, 0, 0, 0.3);
+}
+.sidebar-dark #sidebarToggle {
+    background-color: rgba(0, 0, 0, 0.2);
+}
+.sidebar-dark .nav-item .nav-link[data-toggle="collapse"]::after {
+    color: rgba(0, 0, 0, 0.5);
+}
+.sidebar-dark .nav-item .nav-link:active, .sidebar-dark .nav-item .nav-link:focus, .sidebar-dark .nav-item .nav-link:hover {
+    color:#2012bf;
+}
+.sidebar-dark .nav-item .nav-link:active i, .sidebar-dark .nav-item .nav-link:focus i, .sidebar-dark .nav-item .nav-link:hover i {
+    color: #2012bf;
+}
+.sidebar-dark #sidebarToggle:hover {
+    background-color: rgba(0, 0, 0, 0.6);
+}
