@@ -35,6 +35,7 @@ Route::middleware('role:admin')->group(function () {
 });
 
 // CRUD for publications
+Route::post('check-publications', 'PublicationController@checkPublicationValidation');
 Route::post('upload_image', 'PublicationController@uploadImage')->name('upload');
 Route::resource('publications', 'PublicationController');
 //deleted user
