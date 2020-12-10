@@ -44,6 +44,6 @@ class User extends Authenticatable
 
     public function publications()
     {
-        return $this->hasMany('App\Models\Publication');
+        return $this->hasMany('App\Models\Publication', 'created_by');
     }
 }
