@@ -15,4 +15,9 @@ class Publication extends Model
     {
         return $this->belongsTo('App\Models\User', 'created_by');
     }
+
+    public function files()
+    {
+        return $this->hasMany('App\Models\File', 'publication_id');
+    }
 }
