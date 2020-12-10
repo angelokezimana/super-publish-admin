@@ -21,8 +21,8 @@ Auth::routes(['register' => false, 'reset' => false, 'confirm' => false]);
 Route::get('/home', 'HomeController@index')->name('home');
 
 //CRUD for categories
- Route::resource('categories', 'CategoriesController');
- Route::post('categories/destroy/{categorie}', 'CategoriesController@destroy');
+Route::resource('categories', 'CategoriesController');
+Route::post('categories/destroy/{categorie}', 'CategoriesController@destroy');
 
 Route::get('/profile', 'UserController@profile')->name('users.profile');
 
@@ -32,6 +32,10 @@ Route::middleware('role:admin')->group(function () {
     Route::put('/users/{user}', 'UserController@update')->name('users.update');
     Route::put('users/{user}/suspend', 'UserController@suspend')->name('users.suspend');
     Route::delete('/users/{user}', 'UserController@destroy')->name('users.destroy');
+
+    // Reports
+    Route::get('reports', 'ReportController@index')->name('reports.index');
+    Route::match(['get', 'post'], 'reports/search', 'ReportController@search')->name('reports.search');
 });
 
 // CRUD for publications

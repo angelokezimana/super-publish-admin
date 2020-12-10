@@ -33,6 +33,9 @@
   <link href="{{ asset('css/chosen.min.css') }}" rel="stylesheet">
   <link href="{{ asset('css/main.css') }}" rel="stylesheet">
 
+  {{-- section Chartjs-css --}}
+  @yield('chartjs-css')
+
   {{-- Full-calendar --}}
   @yield('full-calendar')
   

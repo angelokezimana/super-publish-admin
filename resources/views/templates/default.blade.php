@@ -65,6 +65,10 @@
     <script src="{{ asset('js/sb-admin-2.min.js') }}"></script>
     <script src="{{ asset('js/chosen.jquery.min.js') }}"></script>
     <script src="{{ asset('js/main.js') }}"></script>
+
+    {{-- section Chartjs-js --}}
+    @yield('chartjs-js')
+
     @yield('scripts')
 </body>
 

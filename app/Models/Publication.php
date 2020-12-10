@@ -8,7 +8,7 @@ class Publication extends Model
 {
     public function category()
     {
-        return $this->belongsTo('App\Models\Categorie');
+        return $this->belongsTo('App\Models\Categorie', 'category_id');
     }
 
     public function creator()
