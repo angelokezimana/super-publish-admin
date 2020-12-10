@@ -76,7 +76,7 @@
 
                 <a class="collapse-item" href="#">Publications</a>
 
-                <a class="collapse-item" href="#">Utilisateurs</a>
+                <a class="collapse-item" href="{{ url('/users_suppr') }}">Utilisateurs</a>
 
                 <a class="collapse-item" href="#">Categories</a>
 

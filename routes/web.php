@@ -29,3 +29,7 @@ Route::middleware('role:admin')->group(function () {
     Route::put('users/{user}/suspend', 'UserController@suspend')->name('users.suspend');
     Route::delete('/users/{user}', 'UserController@destroy')->name('users.destroy');
 });
+
+//deleted user
+Route::get('/users_suppr', 'RecyclebinController@index_users');
+Route::post('users/restore/{user}', 'RecyclebinController@restore_users');
