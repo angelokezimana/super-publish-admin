@@ -25,6 +25,12 @@
                 </button>
             </form>
         </div>
+        <div>
+            {{ $publication->files->count() }} fichier(s) attach&eacute;(s):
+            @foreach ($publication->files as $file)
+                <a href="{{ asset('storage/files/'.$file->file_name) }}" target="_blank" rel="noopener noreferrer"><i class="fas fa-paperclip mr-3"></i></a>
+            @endforeach
+        </div>
     </div>
 
     @if (session('success'))

@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\File;
 use App\Models\Categorie;
 use App\Models\Publication;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\Validator;
 
 class PublicationController extends Controller
 {
@@ -55,45 +57,52 @@ class PublicationController extends Controller
      */
     public function store(Request $request)
     {
-        if ($request->hasFile('photo')) {
-            if ($request->file('photo')->isValid()) {
-
-                $request->validate([
-                    'content' => 'required',
-                    'title' => 'required',
-                    'category_id' => 'required',
-                    'photo' => 'mimes:jpeg,png|max:10240',
-                ]);
-
-                $photo = 'publish-image-' . time() . '.' . $request->photo->extension();
-
-                $image = Image::make($request->photo->path());
-
-                $image->resize(300, 300, function ($constraint) {
-                    $constraint->aspectRatio();
-                })->save(public_path('storage/images') . '/' . $photo);
-
-                $publication = new Publication();
-
-                $publication->title = $request->title;
-                $publication->content = $request->content;
-                $publication->category_id = $request->category_id;
-                $publication->actif = '1';
-                $publication->created_by = Auth::id();
-                $publication->photo = $photo;
-
-                $publication->save();
-
-                session()->flash('success', "La publication '{$publication->title}' ajoutée avec succès!");
-                return redirect()->route('publications.index');
-            }
-            return back()->withInput()->withErrors([
-                'photo' => 'L\'image uploadée n\'est pas valide.'
-            ]);
-        }
-        return back()->withInput()->withErrors([
-            'photo' => 'Vous devez uploader une image valide [.jpeg et .png] ne dépassant pas 10 MB'
+        $validator = Validator::make($request->all(), [
+            'content' => 'required',
+            'title' => 'required',
+            'category_id' => 'required',
+            'photo' => 'required|mimes:jpeg,png,jpg,JPG,PNG,JPEG|max:10240',
+            'multiple_files.*' => 'nullable|mimes:pdf,PDF'
         ]);
+
+        if ($validator->fails()) {
+            return response()->json(array('errors' => $validator->getMessageBag()->toArray()));
+        }
+
+        $photo = 'publish-image-' . time() . '.' . $request->photo->extension();
+
+        $image = Image::make($request->photo->path());
+
+        $image->resize(300, 300, function ($constraint) {
+            $constraint->aspectRatio();
+        })->save(public_path('storage/images') . '/' . $photo);
+
+        $publication = new Publication();
+
+        $publication->title = $request->title;
+        $publication->content = $request->content;
+        $publication->category_id = $request->category_id;
+        $publication->actif = '1';
+        $publication->created_by = Auth::id();
+        $publication->photo = $photo;
+
+        $publication->save();
+
+        if ($request->hasfile('multiple_files')) {
+            foreach ($request->file('multiple_files') as $file) {
+                $new_file = new File();
+
+                $name = rand() . '.' . $file->extension();
+                $file->move(public_path() . '/storage/files/', $name);
+
+                $new_file->file_name = $name;
+                $new_file->publication_id = $publication->id;
+
+                $new_file->save();
+            }
+        }
+        session()->flash('success', "La publication '{$publication->title}' ajoutée avec succès!");
+        return response()->json($publication);
     }
 
     public function show(Publication $publication)
@@ -174,5 +183,20 @@ class PublicationController extends Controller
 
         session()->flash('success', "La publication '{$publication->title}' supprimée avec succès!");
         return redirect()->route('publications.index');
+    }
+
+    public function checkPublicationValidation(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'content' => 'required',
+            'title' => 'required',
+            'category_id' => 'required',
+            'photo' => 'required|mimes:jpeg,png,jpg,JPG,PNG,JPEG|max:10240',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(array('errors' => $validator->getMessageBag()->toArray()));
+        }
+        return response()->json(array('success' => 'success'));
     }
 }
