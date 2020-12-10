@@ -1,5 +1,9 @@
 @extends('templates.default')
 
+@section('multi-step-form-css')
+<link href="{{ asset('css/multi-step-form.css') }}" rel="stylesheet">
+@endsection
+
 @section('content')
 <div class="container-fluid">
     <!-- Page Heading -->
@@ -15,58 +19,58 @@
 
     <div class="card shadow mb-4 border-bottom-primary">
         <div class="card-body">
-            <form action="{{ route('publications.store') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('publications.store') }}" method="POST" enctype="multipart/form-data" id="msform">
                 @csrf
-                <div class="form-group">
-                    <label for="title" class="form-control-label">Titre</label>
-                    <input type="text" id="title" name="title" placeholder="Entrez le titre" value="{{ old("title") }}"
-                        class="form-control form-control-sm">
-                    @error('title')
-                    <div class="alert alert-danger">
-                        <i class="fa fa-exclamation-triangle mr-1"></i>{{$message}}
+                <!-- progressbar -->
+                <ul id="progressbar">
+                    <li class="active fas fa-check" id="step1"><strong>Etape 1</strong></li>
+                    <li class="fas fa-check" id="step2"><strong>Etape 2</strong></li>
+                </ul>
+                <fieldset>
+                    <div class="form-group">
+                        <label for="title" class="form-control-label">Titre</label>
+                        <input type="text" id="title" name="title" placeholder="Entrez le titre"
+                            class="form-control form-control-sm">
+                        <div class="alert alert-danger hidden"></div>
                     </div>
-                    @enderror
-                </div>
-                <div class="form-group">
-                    <label for="customFile" class="form-control-label">Photo de couverture</label>
-                    <div class="custom-file">
-                        <input type="file" name="photo" class="custom-file-input" id="customFile">
-                        <label class="custom-file-label" for="customFile">Choose file</label>
-                        @error('photo')
-                        <div class="alert alert-danger">
-                            <i class="fa fa-exclamation-triangle mr-1"></i>{{$message}}
+                    <div class="form-group">
+                        <label for="customFile" class="form-control-label">Photo de couverture</label>
+                        <div class="custom-file">
+                            <input type="file" name="photo" class="custom-file-input" id="customFile">
+                            <label class="custom-file-label" for="customFile">Choose file</label>
+                            <div class="alert alert-danger hidden"></div>
                         </div>
-                        @enderror
                     </div>
-                </div>
-                <div class="form-group">
-                    <label for="category_id" class="form-control-label">cat&eacute;gorie</label>
-                    <select id="category_id" name="category_id" class="form-control">
-                        <option value="">Veuillez s&eacute;lectionner le type de cette publication</option>
-                        @foreach($categories as $category)
-                        <option value="{{ $category->id }}" {!! old('category_id')==$category->id ?
-                            'selected="selected"' : '' !!}>{{ $category->namecategory }}</option>
-                        @endforeach
-                    </select>
-                    @error('category_id')
-                    <div class="alert alert-danger">
-                        <i class="fas fa-exclamation-triangle mr-1"></i>{{$message}}
+                    <div class="form-group">
+                        <label for="category_id" class="form-control-label">cat&eacute;gorie</label>
+                        <select id="category_id" name="category_id" class="form-control">
+                            <option value="">Veuillez s&eacute;lectionner le type de cette publication</option>
+                            @foreach($categories as $category)
+                            <option value="{{ $category->id }}">{{ $category->namecategory }}</option>
+                            @endforeach
+                        </select>
+                        <div class="alert alert-danger hidden"></div>
                     </div>
-                    @enderror
-                </div>
-                <div class="form-group">
-                    <label for="editor" class="form-control-label">Contenu</label>
-                    <textarea id="editor" name="content">{{ old('content') }}</textarea>
-                    @error('content')
-                    <div class="alert alert-danger">
-                        <i class="fa fa-exclamation-triangle mr-1"></i>{{$message}}
+                    <div class="form-group">
+                        <label for="editor" class="form-control-label">Contenu</label>
+                        <textarea id="editor"></textarea>
+                        <div class="content alert alert-danger hidden"></div>
                     </div>
-                    @enderror
-                </div>
-
-                <button type="reset" class="btn btn-secondary btn-sm">Annuler</button>
-                <button type="submit" id="id-form"
-                    class="btn btn-primary btn-sm crud-modal-user-form">Cr&eacute;er</button>
+                    <button type="button" name="next" class="btn btn-sm btn-primary next action-button"><i
+                            class="fas fa-arrow-right mr-1"></i>Suivant</button>
+                </fieldset>
+                <fieldset>
+                    <div class="form-group">
+                        <label class="form-control-label">Fichiers</label>
+                        <input type="file" class="form-control" accept="application/pdf" id="multiple_files" multiple>
+                        <div class="alert alert-danger hidden"></div>
+                    </div>
+                    <button type="button" name="previous"
+                        class="previous action-button-previous btn btn-sm btn-secondary"><i
+                            class="fas fa-arrow-left mr-1"></i>Précédent</button>
+                    <button type="button" name="finish" class="btn btn-sm btn-primary finish-completion"><i
+                            class="fas fa-check mr-1"></i>Confirmer</button>
+                </fieldset>
             </form>
         </div>
     </div>
@@ -82,4 +86,5 @@
         language: 'fr'
     });
 </script>
+<script src="{{ asset('js/multi-step-form.js') }}"></script>
 @endsection
