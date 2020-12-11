@@ -112,7 +112,7 @@ class PublicationController extends Controller
 
     public function edit(Publication $publication)
     {
-        $categories = Categorie::all();
+        $categories = Categorie::whereNull('category_id')->get();
 
         return view('publications.edit', [
             'publication' => $publication,
