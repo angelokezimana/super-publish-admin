@@ -25,10 +25,8 @@ class CategoriesController extends Controller
     public function index()
     {
         //      
-        $categories = DB::table('categories')
-             ->join('users', 'users.id','categories.created_by')
-             ->select(DB::raw('categories.id,categories.category_id,categories.namecategory,categories.created_at,users.username'))
-             ->where('categories.actif','=',1)
+        $categories = Categorie::where('categories.actif','=',1)
+             ->where('category_id',null)
              ->get();           
 
         return view('categories/index', ['categories' => $categories]);
