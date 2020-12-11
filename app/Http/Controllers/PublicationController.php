@@ -62,7 +62,7 @@ class PublicationController extends Controller
             'title' => 'required',
             'category_id' => 'required',
             'photo' => 'required|mimes:jpeg,png,jpg,JPG,PNG,JPEG|max:10240',
-            'multiple_files.*' => 'nullable|mimes:pdf,PDF'
+            'multiple_files.*' => 'nullable|mimes:pdf,PDF,xlsx,xls,doc,docx,jpeg,png,jpg,JPG,PNG,JPEG'
         ]);
 
         if ($validator->fails()) {
