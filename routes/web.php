@@ -21,8 +21,8 @@ Auth::routes(['register' => false, 'reset' => false, 'confirm' => false]);
 Route::get('/home', 'HomeController@index')->name('home');
 
 //CRUD for categories
- Route::resource('categories', 'CategoriesController');
- Route::post('categories/destroy/{categorie}', 'CategoriesController@destroy');
+Route::resource('categories', 'CategoriesController');
+Route::post('categories/destroy/{categorie}', 'CategoriesController@destroy');
 
 Route::get('/profile', 'UserController@profile')->name('users.profile');
 
@@ -32,12 +32,12 @@ Route::middleware('role:admin')->group(function () {
     Route::put('/users/{user}', 'UserController@update')->name('users.update');
     Route::put('users/{user}/suspend', 'UserController@suspend')->name('users.suspend');
     Route::delete('/users/{user}', 'UserController@destroy')->name('users.destroy');
+
+    //deleted user
+    Route::get('/users_suppr', 'RecyclebinController@index_users');
+    Route::post('users/restore/{user}', 'RecyclebinController@restore_users');
+
+    //deleted categories
+    Route::get('/categories_suppr', 'RecyclebinController@index_categories');
+    Route::post('categories/restore/{categorie}', 'RecyclebinController@restore_categories');
 });
-
-//deleted user
-Route::get('/users_suppr', 'RecyclebinController@index_users');
-Route::post('users/restore/{user}', 'RecyclebinController@restore_users');
-
-//deleted categories
-Route::get('/categories_suppr', 'RecyclebinController@index_categories');
-Route::post('categories/restore/{categorie}', 'RecyclebinController@restore_categories');

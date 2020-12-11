@@ -23,9 +23,17 @@
                     <div class="col-md-7">
                         <div class="card-body">
                             <div class="brand-wrapper h1">
-                                <i class="fas fa-newspaper fa-rotate-15 fa-2x mr-4" style="color: #2012bf"></i>{{ config('app.name') }}
+                                <i class="fas fa-newspaper fa-rotate-15 fa-2x mr-4"
+                                    style="color: #2012bf"></i>{{ config('app.name') }}
                             </div>
                             <p class="login-card-description">Connectez-vous à votre compte</p>
+
+                            @if (session('message'))
+                            <div class="alert alert-danger">
+                                <i class="fas fa-exclamation-triangle mr-1"></i>{{ session('message') }}
+                            </div>
+                            @endif
+
                             <form method="POST" action="{{ route('login') }}">
                                 @csrf
 

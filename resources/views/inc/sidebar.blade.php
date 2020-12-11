@@ -39,7 +39,8 @@
             <i class="fas fa-fw fa-list-alt"></i><span>Categories</span>
         </a>
     </li>
-
+    
+    @if(Auth::user()->role->name == 'admin')
     <li class="nav-item">
         <a class="nav-link" href="{{ route('users.index') }}">
             <i class="fas fa-fw fa-users"></i><span>Utilisateurs</span>
@@ -83,6 +84,7 @@
             </div>
         </div>
     </li>
+    @endif
 
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
