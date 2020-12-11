@@ -45,7 +45,7 @@ class PublicationController extends Controller
      */
     public function create()
     {
-        $categories = Categorie::all();
+        $categories = Categorie::whereNull('category_id')->get();
         return view('publications.create', ['categories' => $categories]);
     }
 
