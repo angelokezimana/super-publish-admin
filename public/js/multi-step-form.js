@@ -14,8 +14,7 @@ $(document).ready(function () {
         $('#customFile + label + div').addClass('hidden');
         $('#customFile').removeClass('is-invalid');
         //category_id
-        $('#category_id + div').addClass('hidden');
-        $('#category_id').removeClass('is-invalid');
+        $('.category_error').addClass('hidden');
         //content
         $('.content').addClass('hidden');
 
@@ -53,13 +52,11 @@ $(document).ready(function () {
                     }
                     //category_id
                     if (data.errors.category_id) {
-                        $('#category_id + div').removeClass('hidden');
-                        $('#category_id').addClass('is-invalid');
-                        $('#category_id + div').html("<i class=\"fa fa-exclamation-triangle mr-1\"></i>" + data.errors.category_id);
+                        $('.category_error').removeClass('hidden');
+                        $('.category_error').html("<i class=\"fa fa-exclamation-triangle mr-1\"></i>" + data.errors.category_id);
                     }
                     else {
-                        $('#category_id + div').addClass('hidden');
-                        $('#category_id').removeClass('is-invalid');
+                        $('.category_error').addClass('hidden');
                     }
                     //content
                     if (data.errors.content) {
