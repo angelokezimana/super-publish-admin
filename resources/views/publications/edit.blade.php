@@ -43,19 +43,34 @@
                 </div>
                 <div class="form-group">
                     <label for="category_id" class="form-control-label">cat&eacute;gorie</label>
-                    <select id="category_id" name="category_id" class="form-control">
-                        <option value="">Veuillez s&eacute;lectionner le type de cette publication</option>
+
+                    <select id="category_id" name="category_id" class="standardSelect"
+                        data-placeholder="Veuillez s&eacute;lectionner le type de cette publication">
+                        <option value="" label="default"></option>
                         @foreach($categories as $category)
-                        <option value="{{ $category->id }}" {!! $publication->category_id==$category->id ?
-                            'selected="selected"' : '' !!}>{{ $category->namecategory }}</option>
+                        @if($category->categories->count() > 0)
+                        <optgroup label="{{ $category->namecategory }}">
+                            @foreach ($category->categories as $category2)
+                            <option value="{{ $category2->id }}" {!! $publication->category_id==$category2->id ?
+                                'selected="selected"' : '' !!}>{{ $category2->namecategory }}</option>
+                            @endforeach
+                        </optgroup>
+                        @else
+                        <optgroup label="{{ $category->namecategory }}">
+                            <option value="{{ $category->id }}" {!! $publication->category_id==$category->id ?
+                                'selected="selected"' : '' !!}>{{ $category->namecategory }}</option>
+                        </optgroup>
+                        @endif
                         @endforeach
                     </select>
+
                     @error('category_id')
                     <div class="alert alert-danger">
                         <i class="fas fa-exclamation-triangle mr-1"></i>{{$message}}
                     </div>
                     @enderror
                 </div>
+
                 <div class="form-group">
                     <label for="editor" class="form-control-label">Contenu</label>
                     <textarea id="editor" name="content">{{ old('content') ?? $publication->content }}</textarea>

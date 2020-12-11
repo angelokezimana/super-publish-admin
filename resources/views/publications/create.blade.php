@@ -43,13 +43,23 @@
                     </div>
                     <div class="form-group">
                         <label for="category_id" class="form-control-label">cat&eacute;gorie</label>
-                        <select id="category_id" name="category_id" class="form-control">
-                            <option value="">Veuillez s&eacute;lectionner le type de cette publication</option>
+                        <select id="category_id" name="category_id" class="standardSelect" data-placeholder="Veuillez s&eacute;lectionner le type de cette publication">
+                            <option value="" label="default"></option>
                             @foreach($categories as $category)
-                            <option value="{{ $category->id }}">{{ $category->namecategory }}</option>
+                            @if($category->categories->count() > 0)
+                                <optgroup label="{{ $category->namecategory }}">
+                                    @foreach ($category->categories as $category2)
+                                        <option value="{{ $category2->id }}">{{ $category2->namecategory }}</option>
+                                    @endforeach
+                                </optgroup>
+                            @else
+                                <optgroup label="{{ $category->namecategory }}">
+                                    <option value="{{ $category->id }}">{{ $category->namecategory }}</option>
+                                </optgroup>
+                            @endif
                             @endforeach
                         </select>
-                        <div class="alert alert-danger hidden"></div>
+                        <div class="category_error alert alert-danger hidden"></div>
                     </div>
                     <div class="form-group">
                         <label for="editor" class="form-control-label">Contenu</label>
