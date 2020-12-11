@@ -44,11 +44,9 @@ class ReportController extends Controller
 
         if ($start_date && $end_date) {
             $publications_category = $publications_category->whereBetween('created_at', [$start_date, $end_date]);
-        }
-        elseif($start_date) {
+        } elseif ($start_date) {
             $publications_category = $publications_category->whereDate('created_at', $start_date);
-        }
-        elseif($end_date) {
+        } elseif ($end_date) {
             $publications_category = $publications_category->whereDate('created_at', $end_date);
         }
 
@@ -63,8 +61,10 @@ class ReportController extends Controller
         foreach ($publications_category as $publication_category) {
 
             if (!in_array($publication_category->category->namecategory, $category_name)) {
-                $category_name[] = $publication_category->category->namecategory;
-                $publications_count_per_category[] = $publication_category->category->publications->count();
+                if ($publication_category->category->categories->count() == 0) {
+                    $category_name[] = $publication_category->category->namecategory;
+                    $publications_count_per_category[] = $publication_category->category->publications->count();
+                }
             }
 
             if (!in_array($publication_category->creator->username, $creator)) {
