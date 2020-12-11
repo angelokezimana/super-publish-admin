@@ -2,6 +2,9 @@
 
 @section('content')
 <div class="container-fluid">
+    @if (session('success'))
+    <div class="alert alert-success mb-2"><i class="fa fa-check"></i> {{ session('success') }}</div>
+    @endif
     <!-- Page Heading -->
     <div class="mb-4 text-muted">
         <h1 class="h3 mb-2 text-gray-800">
@@ -32,10 +35,6 @@
             @endforeach
         </div>
     </div>
-
-    @if (session('success'))
-    <div class="alert alert-success mb-2"><i class="fa fa-check"></i> {{ session('success') }}</div>
-    @endif
 
     <div class="card shadow mb-4 border-bottom-primary">
         <div class="card-body">
