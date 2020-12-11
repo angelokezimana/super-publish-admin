@@ -36,16 +36,17 @@ Route::middleware('role:admin')->group(function () {
     // Reports
     Route::get('reports', 'ReportController@index')->name('reports.index');
     Route::match(['get', 'post'], 'reports/search', 'ReportController@search')->name('reports.search');
+
+    //deleted user
+    Route::get('/users_suppr', 'RecyclebinController@index_users');
+    Route::post('users/restore/{user}', 'RecyclebinController@restore_users');
+
+    //deleted categories
+    Route::get('/categories_suppr', 'RecyclebinController@index_categories');
+    Route::post('categories/restore/{categorie}', 'RecyclebinController@restore_categories');
 });
 
 // CRUD for publications
 Route::post('check-publications', 'PublicationController@checkPublicationValidation');
 Route::post('upload_image', 'PublicationController@uploadImage')->name('upload');
 Route::resource('publications', 'PublicationController');
-//deleted user
-Route::get('/users_suppr', 'RecyclebinController@index_users');
-Route::post('users/restore/{user}', 'RecyclebinController@restore_users');
-
-//deleted categories
-Route::get('/categories_suppr', 'RecyclebinController@index_categories');
-Route::post('categories/restore/{categorie}', 'RecyclebinController@restore_categories');
