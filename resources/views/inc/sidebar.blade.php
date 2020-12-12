@@ -48,7 +48,7 @@
     </li>
 
     <li class="nav-item">
-        <a class="nav-link" href="#">
+        <a class="nav-link" href="{{ route('roles.index') }}">
             <i class="fas fa-fw fa-tasks"></i><span>R&ocirc;les</span>
         </a>
     </li>
