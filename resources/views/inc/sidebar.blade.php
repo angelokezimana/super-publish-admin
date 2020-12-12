@@ -46,6 +46,12 @@
         </a>
     </li>
 
+    <li class="nav-item">
+        <a class="nav-link" href="#">
+            <i class="fas fa-fw fa-tasks"></i><span>R&ocirc;les</span>
+        </a>
+    </li>
+
     <!-- Divider -->
     <hr class="sidebar-divider">
 
