@@ -29,7 +29,7 @@
     </div>
 
     @if(auth()->user()->hasAnyPermission(['Voir Publications','Modifier Publications','Creer Publications','Supprimer Publications']))
-    <li class="nav-item">
+    <li class="nav-item {{ request()->routeIs('publications*') ? 'active' : '' }}">
         <a class="nav-link" href="{{ route('publications.index') }}">
             <i class="fas fa-fw fa-clone"></i><span>Publications</span>
         </a>
@@ -37,7 +37,7 @@
     @endif
 
     @if(auth()->user()->hasAnyPermission(['Voir Categories','Modifier Categories','Creer Categories','Supprimer Categories']))
-    <li class="nav-item">
+    <li class="nav-item {{ request()->routeIs('categories*') ? 'active' : '' }}">
         <a class="nav-link" href="{{url('categories')}}">
             <i class="fas fa-fw fa-list-alt"></i><span>Categories</span>
         </a>
