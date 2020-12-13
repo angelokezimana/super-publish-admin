@@ -17,7 +17,7 @@ class CreatePublicationsTable extends Migration
             $table->id();
             $table->string('title');
             $table->text('content');
-            $table->text('slug')->unique();
+            $table->string('slug')->unique();
             $table->unsignedBigInteger('created_by');
             $table->unsignedBigInteger('updated_by')->nullable();
             $table->unsignedBigInteger('category_id');
