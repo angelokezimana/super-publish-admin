@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Categorie;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class CategoriesController extends Controller
 {
@@ -17,31 +17,23 @@ class CategoriesController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-     public function __construct()
+    public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware('permission:Voir Categories|Creer Categories|Modifier Categories|Bloquer Categories|Supprimer Categories', ['only' => ['index']]);
+        $this->middleware('permission:Creer Categories', ['only' => ['store']]);
+        $this->middleware('permission:Modifier Categories', ['only' => ['update']]);
+        $this->middleware('permission:Bloquer Categories', ['only' => ['suspend']]);
+        $this->middleware('permission:Supprimer Categories', ['only' => ['destroy']]);
     }
 
     public function index()
     {
-        //      
-        $categories = Categorie::where('categories.actif','=',1)
-             ->where('category_id',null)
-             ->get();           
+        $categories = Categorie::where('categories.actif', '=', 1)
+            ->where('category_id', null)
+            ->get();
 
         return view('categories/index', ['categories' => $categories]);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-
-
     }
 
     /**
@@ -52,47 +44,25 @@ class CategoriesController extends Controller
      */
     public function store(Request $request)
     {
-        //    
         $validator = Validator::make($request->all(), [
             'namecategory' => ['required', 'string', 'min:2', 'unique:categories'],
-           
+
         ]);
 
         if ($validator->fails()) {
             return response()->json(array('errors' => $validator->getMessageBag()->toArray()));
         }
-        $categories = new Categorie();
-        $categories->namecategory = $request->namecategory;
-        $categories->created_by = Auth::user()->id;
-        $categories->actif = '1';
-         $categories->category_id = $request->category_id;
-        $categories->save();
-        //  }
-        session()->flash('success', "la categorie '{$categories->namecategory}'  ajoutée avec success");
-        return response()->json($categories);
-    }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\categories  $categories
-     * @return \Illuminate\Http\Response
-     */
-    public function show(categorie $categories)
-    {
-        //
-    }
+        $category = new Categorie();
+        $category->namecategory = $request->namecategory;
+        $category->slug = Str::slug($category->namecategory);
+        $category->created_by = Auth::user()->id;
+        $category->actif = '1';
+        $category->category_id = $request->category_id;
+        $category->save();
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\categories  $categories
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(categorie $categories)
-    {
-        //
-
+        session()->flash('success', "La categorie '{$category->namecategory}'  ajoutée avec success");
+        return response()->json($category);
     }
 
     /**
@@ -104,18 +74,13 @@ class CategoriesController extends Controller
      */
     public function update(Request $request, Categorie $category)
     {
-        //
-        // Validation
-        //   
         $validator = Validator::make($request->all(), [
             'namecategory' => [
                 'required',
                 'string',
                 'min:2',
                 Rule::unique('categories')->ignore($category->id),
-           
             ]
-
         ]);
 
         if ($validator->fails()) {
@@ -123,11 +88,11 @@ class CategoriesController extends Controller
         }
 
         $category->namecategory = $request->namecategory;
-        $category->updated_by = Auth::user()->id;        
+        $category->updated_by = Auth::user()->id;
         $category->category_id = $request->category_id;
         $category->save();
 
-        session()->flash('success', "la categorie '{$category->namecategory}' modifiée avec success");
+        session()->flash('success', "La categorie '{$category->namecategory}' modifiée avec success");
         return response()->json($category);
     }
 
@@ -139,16 +104,12 @@ class CategoriesController extends Controller
      */
     public function destroy(Categorie $categorie)
     {
-        //   
-        
-       $categories = Categorie::find($categorie->id);  
-       $categories->updated_by = Auth::user()->id;
-       $categories->actif = 0;
-       $categories->save();
+        $categories = Categorie::find($categorie->id);
+        $categories->updated_by = Auth::user()->id;
+        $categories->actif = 0;
+        $categories->save();
 
-         session()->flash('success', "la categorie '{$categories->namecategory}' supprimée avec success");
-         return redirect('categories');
-        
-
+        session()->flash('success', "La categorie '{$categories->namecategory}' supprimée avec success");
+        return redirect('categories');
     }
 }

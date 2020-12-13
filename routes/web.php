@@ -26,18 +26,23 @@ Route::post('categories/destroy/{categorie}', 'CategoriesController@destroy');
 
 Route::get('/profile', 'UserController@profile')->name('users.profile');
 
-Route::middleware('role:admin')->group(function () {
-    Route::get('/users', 'UserController@index')->name('users.index');
-    Route::post('/users', 'UserController@store')->name('users.store');
-    Route::put('/users/{user}', 'UserController@update')->name('users.update');
-    Route::put('users/{user}/suspend', 'UserController@suspend')->name('users.suspend');
-    Route::delete('/users/{user}', 'UserController@destroy')->name('users.destroy');
+//users
+Route::get('/users', 'UserController@index')->name('users.index');
+Route::post('/users', 'UserController@store')->name('users.store');
+Route::put('/users/{user}', 'UserController@update')->name('users.update');
+Route::put('users/{user}/suspend', 'UserController@suspend')->name('users.suspend');
+Route::delete('/users/{user}', 'UserController@destroy')->name('users.destroy');
 
-    //deleted user
-    Route::get('/users_suppr', 'RecyclebinController@index_users');
-    Route::post('users/restore/{user}', 'RecyclebinController@restore_users');
+//roles
+Route::get('/roles', 'RoleController@index')->name('roles.index');
+Route::post('/roles', 'RoleController@store')->name('roles.store');
+Route::put('/roles/{role}', 'RoleController@update')->name('roles.update');
+Route::delete('/roles/{role}', 'RoleController@destroy')->name('roles.destroy');
 
-    //deleted categories
-    Route::get('/categories_suppr', 'RecyclebinController@index_categories');
-    Route::post('categories/restore/{categorie}', 'RecyclebinController@restore_categories');
-});
+//deleted user
+Route::get('/users_suppr', 'RecyclebinController@index_users')->name('recycleBin.users');
+Route::post('users/restore/{user}', 'RecyclebinController@restore_users');
+
+//deleted categories
+Route::get('/categories_suppr', 'RecyclebinController@index_categories');
+Route::post('categories/restore/{categorie}', 'RecyclebinController@restore_categories');

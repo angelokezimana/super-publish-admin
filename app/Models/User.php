@@ -41,4 +41,37 @@ class User extends Authenticatable
     {
         return $this->belongsTo('App\Models\Role');
     }
+
+    public function hasPermissionTo($permission)
+    {
+        $permission = Permission::with('roles')->whereName($permission)->get();
+
+        foreach ($permission as $perm_name) {
+            return $this->hasPermissionThroughRole($perm_name);
+        }
+    }
+
+    public function hasPermissionThroughRole($permission)
+    {
+        foreach ($permission->roles as $role) {
+            if ($this->role->name == $role->name) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public function hasAnyPermission(array $permissions): bool
+    {
+        $permissions = collect($permissions)->flatten();
+
+        foreach ($permissions as $permission) {
+
+            if ($this->hasPermissionTo($permission)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 }
