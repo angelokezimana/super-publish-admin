@@ -21,6 +21,11 @@ class UserController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware('permission:Voir Utilisateurs|Creer Utilisateurs|Modifier Utilisateurs|Bloquer Utilisateurs|Supprimer Utilisateurs', ['only' => ['index']]);
+        $this->middleware('permission:Creer Utilisateurs', ['only' => ['store']]);
+        $this->middleware('permission:Modifier Utilisateurs', ['only' => ['update']]);
+        $this->middleware('permission:Bloquer Utilisateurs', ['only' => ['suspend']]);
+        $this->middleware('permission:Supprimer Utilisateurs', ['only' => ['destroy']]);
     }
 
     public function index()
