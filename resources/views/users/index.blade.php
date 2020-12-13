@@ -6,10 +6,13 @@
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-2 text-gray-800">
             Liste des utilisateurs
+
+            @can('Creer Utilisateurs')
             <button type="button" class="mb-2 btn btn-primary btn-sm text-white btn-add-user" data-toggle="modal"
                 data-target="#crud-modal-user">
                 <i class="fas fa-user-plus mr-1"></i> Cr&eacute;er un utilisateur
             </button>
+            @endcan
         </h1>
     </div>
 
@@ -51,6 +54,8 @@
                                 !!}</td>
                             <td>
                                 @if($user->id != auth()->user()->id)
+
+                                @can('Modifier Utilisateurs')
                                 <button type="button" class="btn btn-primary btn-sm text-white btn-edit-user"
                                     data-toggle="modal" data-target="#crud-modal-user" data-id="{{ $user->id }}"
                                     data-last_name="{{ $user->last_name }}" data-first_name="{{ $user->first_name }}"
@@ -58,7 +63,9 @@
                                     data-role_id="{{ $user->role->id }}" data-role_name="{{ $user->role->name }}">
                                     <i class="fas fa-edit"></i>
                                 </button>
+                                @endcan
 
+                                @can('Bloquer Utilisateurs')
                                 <form action="{{ route('users.suspend', $user) }}" method="post" class="inline">
                                     @csrf
                                     @method('PUT')
@@ -77,7 +84,9 @@
                                     </button>
                                     @endif
                                 </form>
+                                @endcan
 
+                                @can('Supprimer Utilisateurs')
                                 <form action="{{ route('users.destroy', $user) }}" method="post" class="inline">
                                     @csrf
                                     @method('DELETE')
@@ -87,6 +96,7 @@
                                         <i class="fa fa-trash"></i>
                                     </button>
                                 </form>
+                                @endcan
                                 @endif
                             </td>
                         </tr>
@@ -98,7 +108,10 @@
     </div>
 </div>
 
+@if(auth()->user()->hasAnyPermission(['Creer Utilisateurs','Modifier Utilisateurs']))
 @include('users.partials.crud-modal-user')
+@endif
+
 @endsection
 
 @section('scripts')
