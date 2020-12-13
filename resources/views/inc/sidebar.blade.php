@@ -37,7 +37,7 @@
     @endif
 
     @if(auth()->user()->hasAnyPermission(['Voir Categories','Modifier Categories','Creer Categories','Supprimer Categories']))
-    <li class="nav-item">
+    <li class="nav-item {{ request()->routeIs('categories*') ? 'active' : '' }}">
         <a class="nav-link" href="{{url('categories')}}">
             <i class="fas fa-fw fa-list-alt"></i><span>Categories</span>
         </a>
