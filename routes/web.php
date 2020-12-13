@@ -36,5 +36,5 @@ Route::put('/roles/{role}', 'RoleController@update')->name('roles.update');
 Route::delete('/roles/{role}', 'RoleController@destroy')->name('roles.destroy');
 
 //deleted user
-Route::get('/users_suppr', 'RecyclebinController@index_users');
+Route::get('/users_suppr', 'RecyclebinController@index_users')->name('recycleBin.users');
 Route::post('users/restore/{user}', 'RecyclebinController@restore_users');
