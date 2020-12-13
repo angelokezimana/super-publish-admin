@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\File;
 use App\Models\Categorie;
 use App\Models\Publication;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Intervention\Image\Facades\Image;
@@ -20,6 +21,10 @@ class PublicationController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware('permission:Voir Publications|Creer Publications|Modifier Publications|Bloquer Publications|Supprimer Publications', ['only' => ['index', 'show']]);
+        $this->middleware('permission:Creer Publications', ['only' => ['create', 'store']]);
+        $this->middleware('permission:Modifier Publications', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:Supprimer Publications', ['only' => ['destroy']]);
     }
 
     /**
@@ -62,7 +67,7 @@ class PublicationController extends Controller
             'title' => 'required',
             'category_id' => 'required',
             'photo' => 'required|mimes:jpeg,png,jpg,JPG,PNG,JPEG|max:10240',
-            'multiple_files.*' => 'nullable|mimes:pdf,PDF'
+            'multiple_files.*' => 'nullable|mimes:pdf,PDF,xlsx,xls,doc,docx,jpeg,png,jpg,JPG,PNG,JPEG'
         ]);
 
         if ($validator->fails()) {
@@ -81,6 +86,7 @@ class PublicationController extends Controller
 
         $publication->title = $request->title;
         $publication->content = $request->content;
+        $publication->slug = $this->createSlug($request->title);
         $publication->category_id = $request->category_id;
         $publication->actif = '1';
         $publication->created_by = Auth::id();
@@ -146,9 +152,9 @@ class PublicationController extends Controller
 
         $publication->title = $request->title;
         $publication->content = $request->content;
+        $publication->slug = $this->createSlug($request->title, $publication->id);
         $publication->category_id = $request->category_id;
         $publication->updated_by = Auth::id();
-
 
         $publication->save();
 
@@ -198,5 +204,32 @@ class PublicationController extends Controller
             return response()->json(array('errors' => $validator->getMessageBag()->toArray()));
         }
         return response()->json(array('success' => 'success'));
+    }
+
+    private function createSlug($title, $id = 0)
+    {
+        $slug = Str::slug($title);
+
+        $allSlugs = $this->getRelatedSlugs($slug, $id);
+
+        if (!$allSlugs->contains('slug', $slug)) {
+            return $slug;
+        }
+
+        for ($i = 1;; $i++) {
+
+            $newSlug = $slug . '-' . $i;
+
+            if (!$allSlugs->contains('slug', $newSlug)) {
+                return $newSlug;
+            }
+        }
+    }
+
+    private function getRelatedSlugs($slug, $id)
+    {
+        return Publication::select('slug')->where('slug', 'like', $slug . '%')
+            ->where('id', '<>', $id)
+            ->get();
     }
 }

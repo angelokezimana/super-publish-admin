@@ -16,9 +16,13 @@
             Cat&eacute;gorie: <span class="badge badge-success">{{ $publication->category->namecategory }}</span>
         </p>
         <div>
+            @can('Modifier Publications')
             <a href="{{ route('publications.edit', $publication) }}" class="btn btn-primary btn-sm">
                 Modifier
             </a>
+            @endcan
+
+            @can('Supprimer Publications')
             <form action="{{ route('publications.destroy', $publication) }}" method="post" class="inline">
                 @csrf
                 @method('DELETE')
@@ -27,6 +31,7 @@
                     Supprimer
                 </button>
             </form>
+            @endcan
         </div>
         <div>
             {{ $publication->files->count() }} fichier(s) attach&eacute;(s):

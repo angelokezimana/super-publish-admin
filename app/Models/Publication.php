@@ -20,4 +20,9 @@ class Publication extends Model
     {
         return $this->hasMany('App\Models\File', 'publication_id');
     }
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
 }
