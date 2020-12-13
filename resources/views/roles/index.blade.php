@@ -6,10 +6,13 @@
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-2 text-gray-800">
             Liste des r&ocirc;les
+
+            @can('Creer Roles')
             <button type="button" class="mb-2 btn btn-primary btn-sm text-white btn-add-role" data-toggle="modal"
                 data-target="#crud-modal-role">
                 <i class="fas fa-plus mr-1"></i> Cr&eacute;er un r&ocirc;le
             </button>
+            @endcan
         </h1>
     </div>
 
@@ -47,12 +50,15 @@
                                 @endforelse
                             </td>
                             <td>
+                                @can('Modifier Roles')
                                 <button type="button" class="btn btn-primary btn-sm text-white btn-edit-role"
                                     data-toggle="modal" data-target="#crud-modal-role" data-id="{{ $role->id }}"
                                     data-name="{{ $role->name }}" data-permissions="{{ implode(',', $role->permissions()->pluck('id')->toArray()) }}">
                                     <i class="fas fa-edit"></i>
                                 </button>
+                                @endcan
 
+                                @can('Supprimer Roles')
                                 <form action="{{ route('roles.destroy', $role) }}" method="post" class="inline">
                                     @csrf
                                     @method('DELETE')
@@ -62,6 +68,7 @@
                                         <i class="fa fa-trash"></i>
                                     </button>
                                 </form>
+                                @endcan
                             </td>
                         </tr>
                         @endforeach
@@ -72,7 +79,10 @@
     </div>
 </div>
 
+@if(auth()->user()->hasAnyPermission(['Creer Roles','Modifier Roles']))
 @include('roles.partials.crud-modal-role')
+@endif
+
 @endsection
 
 @section('scripts')
