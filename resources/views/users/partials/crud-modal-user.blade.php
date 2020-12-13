@@ -64,7 +64,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Annuler</button>
+                    <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Fermer</button>
                     <button type="button" id="id-form" class="btn btn-primary btn-sm crud-modal-user-form">Cr&eacute;er</button>
                 </div>
             </form>

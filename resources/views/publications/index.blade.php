@@ -8,9 +8,12 @@
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-2 text-gray-800">
             Liste des publications
+
+            @can('Creer Publications')
             <a href="{{ route('publications.create') }}" class="mb-2 btn btn-primary btn-sm text-white">
                 <i class="fa fa-plus"></i> Cr&eacute;er une publication
             </a>
+            @endcan
         </h1>
     </div>
 
@@ -43,13 +46,13 @@
                 </p>
                 <div class="card-footer">
 
-                    @can('Modifier Evenements')
+                    @can('Modifier Publications')
                     <a href="{{ route('publications.edit', $publication) }}" class="btn btn-primary btn-sm">
                         <i class="fas fa-edit mr-1"></i>Modifier
                     </a>
                     @endcan
 
-                    @can('Supprimer Evenements')
+                    @can('Supprimer Publications')
                     <form action="{{ route('publications.destroy', $publication) }}" method="post" class="inline">
                         @csrf
                         @method('DELETE')

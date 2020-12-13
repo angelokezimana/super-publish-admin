@@ -72,7 +72,7 @@
                 <fieldset>
                     <div class="form-group">
                         <label class="form-control-label">Fichiers</label>
-                        <input type="file" class="form-control" accept="application/pdf" id="multiple_files" multiple>
+                        <input type="file" class="form-control" id="multiple_files" multiple>
                         <div class="alert alert-danger hidden"></div>
                     </div>
                     <button type="button" name="previous"
