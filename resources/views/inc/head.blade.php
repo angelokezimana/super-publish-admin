@@ -16,6 +16,8 @@
 
   <title>{{ config('app.name') }}</title>
 
+  <script src="{{ asset('js/ckEditor/ckeditor.js') }}"></script>
+
   <!-- Custom fonts for this template -->
   <link href="{{ asset('css/all.css') }}" rel="stylesheet" type="text/css">
   <link
