@@ -38,3 +38,7 @@ Route::delete('/roles/{role}', 'RoleController@destroy')->name('roles.destroy');
 //deleted user
 Route::get('/users_suppr', 'RecyclebinController@index_users')->name('recycleBin.users');
 Route::post('users/restore/{user}', 'RecyclebinController@restore_users');
+
+//pages
+Route::post('pages/upload_image', 'PageController@uploadImage')->name('pages.upload');
+Route::resource('pages', 'PageController');
