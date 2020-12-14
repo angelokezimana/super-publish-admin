@@ -55,3 +55,7 @@ Route::match(['get', 'post'], 'reports/search', 'ReportController@search')->name
 Route::post('check-publications', 'PublicationController@checkPublicationValidation');
 Route::post('upload_image', 'PublicationController@uploadImage')->name('upload');
 Route::resource('publications', 'PublicationController');
+
+//pages
+Route::post('pages/upload_image', 'PageController@uploadImage')->name('pages.upload');
+Route::resource('pages', 'PageController');

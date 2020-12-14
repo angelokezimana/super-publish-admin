@@ -43,6 +43,14 @@
         </a>
     </li>
     @endif
+
+    @if(auth()->user()->hasAnyPermission(['Voir Pages','Modifier Pages','Creer Pages','Supprimer Pages']))
+    <li class="nav-item {{ request()->routeIs('pages*') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('pages.index') }}">
+            <i class="fas fa-fw fa-file"></i><span>Pages</span>
+        </a>
+    </li>
+    @endif
     
     @if(auth()->user()->hasAnyPermission(['Voir Utilisateurs','Creer Utilisateurs','Modifier Utilisateurs','Supprimer
     Utilisateurs']))
