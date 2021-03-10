@@ -4,6 +4,7 @@ use App\Models\Role;
 use App\Models\User;
 use App\Models\Permission;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class RoleSeeder extends Seeder
 {
@@ -24,7 +25,7 @@ class RoleSeeder extends Seeder
             'email' => 'admin@admin.com',
             'username' => 'admin',
             'actif' => 1,
-            'password' => '$2y$10$2FdIVd1fvX3Cag8Rd8qegudveBtC7YzT0FUfxCke/sqp5EF2ike86'
+            'password' => Hash::make('password'),
         ]);
 
         User::updateOrCreate([
@@ -34,7 +35,7 @@ class RoleSeeder extends Seeder
             'email' => 'editor@editor.com',
             'username' => 'editor',
             'actif' => 1,
-            'password' => '$2y$10$2FdIVd1fvX3Cag8Rd8qegudveBtC7YzT0FUfxCke/sqp5EF2ike86'
+            'password' => Hash::make('password')
         ]);
 
         $permissions = [
